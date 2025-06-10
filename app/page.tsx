@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { fetchPostMetadataBySlug } from '../utils/postUtils';
 import PostCard from '../components/PostCard';
 import { Post } from '../types';
@@ -101,10 +102,12 @@ const HomePage: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       {heroImageUrl && (
         <section className="mb-12 rounded-lg overflow-hidden shadow-xl">
-          <img 
-            src={heroImageUrl} 
-            alt="Blog hero banner" 
-            className="w-full h-auto max-h-[300px] md:max-h-[400px] object-cover" 
+          <Image
+            src={heroImageUrl}
+            alt="Blog hero banner"
+            width={1200}
+            height={400}
+            className="w-full h-auto max-h-[300px] md:max-h-[400px] object-cover"
           />
         </section>
       )}

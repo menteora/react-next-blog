@@ -3,6 +3,7 @@
 
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 import { Post } from '../types';
 
 interface PostCardProps {
@@ -14,12 +15,16 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     <article className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl duration-300 flex flex-col">
       {post.imageUrl && (
         <Link href={`/post/${post.slug}`} aria-hidden="true" tabIndex={-1}>
-          <img 
-            src={post.imageUrl} 
-            alt={`Featured image for ${post.title}`} 
-            className="w-full h-48 object-cover" 
-            loading="lazy"
-          />
+          <div className="relative w-full h-48">
+            <Image
+              src={post.imageUrl}
+              alt={`Featured image for ${post.title}`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, 33vw"
+              priority={false}
+            />
+          </div>
         </Link>
       )}
       <div className="p-6 flex flex-col flex-grow">
