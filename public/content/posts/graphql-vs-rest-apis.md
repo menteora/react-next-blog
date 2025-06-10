@@ -4,7 +4,7 @@ date: "2024-01-20"
 author: "Emily White"
 excerpt: "A comparative look at GraphQL and REST APIs, helping you decide which approach is best suited for your next project."
 tags: ["GraphQL", "REST", "API", "Web Development", "Backend"]
-imageUrl: "post-image.jpg"
+imageUrl: "images/post-image.jpg"
 ---
 
 # GraphQL vs. REST: Choosing the Right API Paradigm
