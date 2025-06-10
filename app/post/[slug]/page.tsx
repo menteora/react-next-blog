@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Post } from '../../../types';
@@ -202,10 +203,12 @@ const PostPage: React.FC = () => {
 
         {post.imageUrl && (
           <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
-            <img 
-              src={post.imageUrl} 
-              alt={`Featured image for ${post.title}`} 
-              className="w-full h-auto max-h-[500px] object-cover" 
+            <Image
+              src={post.imageUrl}
+              alt={`Featured image for ${post.title}`}
+              width={1200}
+              height={500}
+              className="w-full h-auto max-h-[500px] object-cover"
             />
           </div>
         )}
