@@ -1,6 +1,4 @@
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import React from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -8,16 +6,6 @@ import remarkGfm from 'remark-gfm';
 interface MarkdownRendererProps {
   content: string;
 }
-
-// Define the expected props structure for the 'code' component
-// based on react-markdown's typical signature.
-type CodeComponentProps = {
-  inline?: boolean;
-  className?: string;
-  children: React.ReactNode;
-  // Allows for other HTML attributes to be collected by ...props
-  [key: string]: any; 
-};
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   const customComponents: Components = {
@@ -29,9 +17,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
     ul: ({ ...props }) => <ul className="list-disc pl-8 my-4 space-y-1" {...props} />,
     ol: ({ ...props }) => <ol className="list-decimal pl-8 my-4 space-y-1" {...props} />,
     li: ({ ...props }) => <li className="my-1" {...props} />,
-    code: ({ inline, className, children, ...props }: CodeComponentProps) => {
+    code: ({ className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '');
-      if (!inline && match) {
+      if (match) {
         return (
           <pre className="bg-gray-900 text-white p-4 rounded-md my-4 overflow-x-auto">
             <code className={`language-${match[1]}`} {...props}>
