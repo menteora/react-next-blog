@@ -4,7 +4,7 @@ date: "2024-04-25"
 author: "David Chen"
 excerpt: "Stay updated with the latest additions to the JavaScript language, enhancing developer productivity and code elegance."
 tags: ["JavaScript", "ESNext", "Web Development", "Programming"]
-imageUrl: "images/post-image.jpg"
+imageUrl: "/images/post-image.jpg"
 ---
 
 # Exploring New Features in Modern JavaScript (ES2023+)

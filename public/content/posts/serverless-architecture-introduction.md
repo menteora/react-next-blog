@@ -4,7 +4,7 @@ date: "2023-10-01"
 author: "Michael Black"
 excerpt: "An overview of serverless computing, its advantages like cost-efficiency and scalability, and common use cases."
 tags: ["Serverless", "Cloud Computing", "AWS Lambda", "Azure Functions", "Architecture"]
-imageUrl: "images/post-image.jpg"
+imageUrl: "/images/post-image.jpg"
 ---
 
 # Introduction to Serverless Architecture
