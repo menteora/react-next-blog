@@ -1,103 +1,170 @@
-import Image from "next/image";
 
-export default function Home() {
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import { fetchPostMetadataBySlug } from '../utils/postUtils';
+import PostCard from '../components/PostCard';
+import { Post } from '../types';
+import { useSiteConfig } from '../contexts/SiteConfigContext';
+
+const POSTS_PER_PAGE = 10;
+
+// ALL_POST_SLUGS removed
+
+const HomePage: React.FC = () => {
+  const { config, isLoading: isConfigLoading, error: configError } = useSiteConfig();
+  const [allPosts, setAllPosts] = useState<Omit<Post, 'markdownContent'>[]>([]);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+  const [postsError, setPostsError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      setIsLoadingPosts(true);
+      setPostsError(null);
+      try {
+        const manifestResponse = await fetch('/content/post-manifest.json');
+        if (!manifestResponse.ok) {
+          throw new Error(`Failed to fetch post manifest: ${manifestResponse.statusText} (status ${manifestResponse.status})`);
+        }
+        const postSlugs: string[] = await manifestResponse.json();
+
+        if (!Array.isArray(postSlugs)) {
+            throw new Error('Post manifest is not a valid array.');
+        }
+
+        if (postSlugs.length === 0) {
+          setAllPosts([]);
+          setIsLoadingPosts(false);
+          return;
+        }
+
+        const fetchedPostsMetadata = await Promise.all(
+          postSlugs.map(slug => fetchPostMetadataBySlug(slug))
+        );
+        
+        const validPosts = fetchedPostsMetadata.filter(post => !post.title.startsWith('Error Loading:'));
+        
+        const sortedPosts = validPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        setAllPosts(sortedPosts);
+      } catch (err: unknown) {
+        console.error("Failed to load posts:", err);
+        const message = err instanceof Error ? err.message : String(err);
+        const userActionMessage = "This usually means the file '/content/post-manifest.json' is missing in your 'public/content/' folder or is not accessible. Please create this file with a JSON array of your post slugs (e.g., [\"my-first-post\", \"another-post\"]).";
+        setPostsError(`Error: ${message}. ${userActionMessage}`);
+      } finally {
+        setIsLoadingPosts(false);
+      }
+    };
+    loadPosts();
+  }, []);
+
+  const heroImageUrl = isConfigLoading || configError ? null : config.homepageHeroImageUrl;
+
+  // Pagination logic
+  const indexOfLastPost = currentPage * POSTS_PER_PAGE;
+  const indexOfFirstPost = indexOfLastPost - POSTS_PER_PAGE;
+  const currentPosts = allPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+
+  const paginate = (pageNumber: number) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
+  if (isLoadingPosts) {
+    return (
+      <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-600"></div>
+        <p className="ml-4 text-lg text-gray-700">Loading posts...</p>
+      </div>
+    );
+  }
+
+  if (postsError) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-3xl font-bold text-red-600 mb-4">Error Loading Posts</h1>
+        <p className="text-lg text-gray-700 whitespace-pre-line">{postsError}</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="container mx-auto px-4 py-8">
+      {heroImageUrl && (
+        <section className="mb-12 rounded-lg overflow-hidden shadow-xl">
+          <img 
+            src={heroImageUrl} 
+            alt="Blog hero banner" 
+            className="w-full h-auto max-h-[300px] md:max-h-[400px] object-cover" 
+          />
+        </section>
+      )}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <header className="mb-12 text-center">
+        <h1 className="text-5xl font-extrabold text-primary-800">Welcome to the Blog</h1>
+        <p className="text-xl text-gray-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
+      </header>
+      
+      {currentPosts.length > 0 ? (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {currentPosts.map(post => (
+              <PostCard key={post.slug} post={post as Post} /> 
+            ))}
+          </div>
+          {totalPages > 1 && (
+            <nav aria-label="Posts pagination" className="mt-12 flex justify-center items-center space-x-2">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                aria-label="Previous page"
+              >
+                &larr; Previous
+              </button>
+              {pageNumbers.map(number => (
+                <button
+                  key={number}
+                  onClick={() => paginate(number)}
+                  className={`px-4 py-2 rounded transition-colors ${
+                    currentPage === number
+                      ? 'bg-primary-800 text-white font-bold ring-2 ring-primary-500'
+                      : 'bg-primary-200 text-primary-700 hover:bg-primary-300'
+                  }`}
+                  aria-current={currentPage === number ? "page" : undefined}
+                  aria-label={`Go to page ${number}`}
+                >
+                  {number}
+                </button>
+              ))}
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                aria-label="Next page"
+              >
+                Next &rarr;
+              </button>
+            </nav>
+          )}
+        </>
+      ) : (
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-semibold text-gray-700">No posts yet!</h2>
+          <p className="text-gray-500 mt-2">Check back soon for new content, or ensure the post manifest file is configured if posts exist.</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      )}
     </div>
   );
-}
+};
+
+export default HomePage;

@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import Navbar from "../components/Navbar";
+import CookieConsentBanner from "../components/CookieConsentBanner";
+import AnalyticsRouteChangeTracker from "../components/AnalyticsRouteChangeTracker";
+import { SiteConfigProvider } from "../contexts/SiteConfigContext";
+import { CookieConsentProvider } from "../contexts/CookieConsentContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,10 +30,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SiteConfigProvider>
+          <CookieConsentProvider>
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-grow bg-gray-100 py-8">
+                <AnalyticsRouteChangeTracker />
+                {children}
+              </main>
+              <CookieConsentBanner />
+              <footer className="bg-primary-800 text-primary-100 text-center p-6 shadow-inner">
+                <p>&copy; {new Date().getFullYear()} React Markdown Blog. All rights reserved.</p>
+                <p className="text-sm mt-1">
+                  Powered by React, Tailwind CSS, and your Markdown! |{' '}
+                  <Link href="/page/privacy-policy" className="underline hover:text-primary-300">
+                    Informativa Privacy e Cookie Policy
+                  </Link>
+                </p>
+              </footer>
+            </div>
+          </CookieConsentProvider>
+        </SiteConfigProvider>
       </body>
     </html>
   );
