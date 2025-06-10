@@ -4,7 +4,7 @@ date: "2024-05-10"
 author: "Sarah Miller"
 excerpt: "Unlock the power of CSS Grid for creating complex, responsive web layouts with ease."
 tags: ["CSS", "Frontend", "Web Design", "Grid Layout"]
-imageUrl: "post-image.jpg"
+imageUrl: "images/post-image.jpg"
 ---
 
 # A Deep Dive into CSS Grid Layout

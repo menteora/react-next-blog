@@ -4,7 +4,7 @@ date: '2024-07-28'
 author: Alex Doe
 excerpt: A comprehensive beginner-friendly guide to understanding and effectively using React Hooks such as useState, useEffect, and more for state management and side effects in functional components.
 tags: React, JavaScript, Frontend, Hooks, State Management
-imageUrl: "post-image.jpg"
+imageUrl: "images/post-image.jpg"
 ---
 
 # Getting Started with React Hooks

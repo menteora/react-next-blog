@@ -4,7 +4,7 @@ date: '2024-07-15'
 author: Jane Smith
 excerpt: Explore the power of Tailwind CSS and its utility-first approach to build custom user interfaces with incredible speed and efficiency.
 tags: TailwindCSS, CSS, Frontend, Web Development, UI, UX
-imageUrl: post-image.jpg
+imageUrl: images/post-image.jpg
 ---
 
 # Mastering Tailwind CSS for Rapid UI Development
