@@ -4,7 +4,7 @@ date: "2023-12-15"
 author: "Brian Green"
 excerpt: "Improve your website's user experience and SEO by understanding and optimizing for Google's Core Web Vitals (LCP, FID, CLS)."
 tags: ["Performance", "Web Vitals", "SEO", "Frontend", "Optimization"]
-imageUrl: "https://picsum.photos/seed/web-vitals-post/800/450"
+imageUrl: "post-image.jpg"
 ---
 
 # Optimizing Web Performance: Understanding Core Web Vitals

@@ -4,7 +4,7 @@ date: "2024-02-29"
 author: "Kevin Liu"
 excerpt: "Discover Deno, the modern and secure runtime for JavaScript and TypeScript, created by the original author of Node.js."
 tags: ["Deno", "JavaScript", "TypeScript", "Backend", "Node.js"]
-imageUrl: "https://picsum.photos/seed/deno-intro-post/800/450"
+imageUrl: "post-image.jpg"
 ---
 
 # An Introduction to Deno

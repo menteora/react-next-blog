@@ -1,3 +1,3 @@
 blogTitle: "My React Markdown Blog"
-homepageHeroImageUrl: "https://picsum.photos/seed/homepage-hero/1200/400" # A placeholder hero image for the homepage
+homepageHeroImageUrl: "post-image.jpg" # A placeholder hero image for the homepage
 gaMeasurementId: "G-XXXXXXXXXX" # Replace with your actual Google Analytics Measurement ID
