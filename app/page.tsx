@@ -24,9 +24,9 @@ const HomePage: React.FC = () => {
       setIsLoadingPosts(true);
       setPostsError(null);
       try {
-        const manifestResponse = await fetch('/content/post-manifest.json');
+        const manifestResponse = await fetch('/api/post-slugs');
         if (!manifestResponse.ok) {
-          throw new Error(`Failed to fetch post manifest: ${manifestResponse.statusText} (status ${manifestResponse.status})`);
+          throw new Error(`Failed to fetch post list: ${manifestResponse.statusText} (status ${manifestResponse.status})`);
         }
         const postSlugs: string[] = await manifestResponse.json();
 
@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
       } catch (err: unknown) {
         console.error("Failed to load posts:", err);
         const message = err instanceof Error ? err.message : String(err);
-        const userActionMessage = "This usually means the file '/content/post-manifest.json' is missing in your 'public/content/' folder or is not accessible. Please create this file with a JSON array of your post slugs (e.g., [\"my-first-post\", \"another-post\"]).";
+        const userActionMessage = "This usually means the posts directory is missing under 'public/content/posts'.";
         setPostsError(`Error: ${message}. ${userActionMessage}`);
       } finally {
         setIsLoadingPosts(false);
