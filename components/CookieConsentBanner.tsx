@@ -22,7 +22,7 @@ const CookieConsentBanner: React.FC = () => {
         <p className="text-sm mb-3 sm:mb-0 sm:mr-4">
           Utilizziamo i cookie per migliorare la tua esperienza e per finalità analitiche, previo tuo consenso. 
           Per maggiori dettagli, consulta la nostra{' '}
-          <Link to="/page/privacy-policy" className="underline hover:text-primary-200">
+          <Link href="/page/privacy-policy" className="underline hover:text-primary-200">
             Informativa Privacy e Cookie Policy
           </Link>.
         </p>
