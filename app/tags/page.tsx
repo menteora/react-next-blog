@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { fetchPostMetadataBySlug } from '../../utils/postUtils';
+import slugify from '../../utils/slugify';
 
 // ALL_POST_SLUGS removed
 
@@ -83,7 +84,7 @@ const TagsPage: React.FC = () => {
           {tags.map(tag => (
             <Link
               key={tag}
-              href={`/tags/${encodeURIComponent(tag)}`}
+              href={`/tags/${slugify(tag)}`}
               className="bg-primary-600 text-white text-lg font-semibold px-6 py-3 rounded-lg shadow hover:bg-primary-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               aria-label={`View posts tagged with ${tag}`}
             >
