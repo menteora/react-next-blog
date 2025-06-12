@@ -97,7 +97,8 @@ const PostPage = async ({ params }: PageProps) => {
   const { slug } = await params;
   const post = await getPostData(slug);
 
-  const postUrl = `/post/${post.slug}`;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const postUrl = `${basePath}/post/${post.slug}`;
   const encodedPostUrl = encodeURIComponent(postUrl);
   const encodedTitle = encodeURIComponent(post.title);
   const encodedExcerpt = encodeURIComponent(post.excerpt);
@@ -136,7 +137,11 @@ const PostPage = async ({ params }: PageProps) => {
         {post.imageUrl && (
           <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src={post.imageUrl}
+              src={
+                !post.imageUrl.startsWith('http')
+                  ? `${basePath}${post.imageUrl}`
+                  : post.imageUrl
+              }
               alt={`Featured image for ${post.title}`}
               width={1200}
               height={500}
