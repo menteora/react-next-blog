@@ -35,7 +35,8 @@ export const SiteConfigProvider: React.FC<{ children: ReactNode }> = ({ children
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch('/config.yml');
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+        const response = await fetch(`${basePath}/config.yml`);
         if (!response.ok) {
           throw new Error(`Failed to fetch config.yml: ${response.statusText} (status: ${response.status})`);
         }

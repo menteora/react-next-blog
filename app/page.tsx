@@ -24,7 +24,8 @@ const HomePage: React.FC = () => {
       setIsLoadingPosts(true);
       setPostsError(null);
       try {
-        const manifestResponse = await fetch('/api/post-slugs');
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+        const manifestResponse = await fetch(`${basePath}/api/post-slugs`);
         if (!manifestResponse.ok) {
           throw new Error(`Failed to fetch post list: ${manifestResponse.statusText} (status ${manifestResponse.status})`);
         }
