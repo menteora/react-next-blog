@@ -11,13 +11,19 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const imageSrc =
+    post.imageUrl && !post.imageUrl.startsWith('http')
+      ? `${basePath}${post.imageUrl}`
+      : post.imageUrl;
+
   return (
     <article className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl duration-300 flex flex-col">
       {post.imageUrl && (
         <Link href={`/post/${post.slug}`} aria-hidden="true" tabIndex={-1}>
           <div className="relative w-full h-48">
             <Image
-              src={post.imageUrl}
+              src={imageSrc as string}
               alt={`Featured image for ${post.title}`}
               fill
               className="object-cover"
