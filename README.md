@@ -53,6 +53,8 @@ npm run build
 
 `next.config.ts` sets `output: 'export'`, so `next build` automatically runs `next export` and produces the static files in the `out` directory. If you remove that option you must run `next export` after the build.
 
+The configuration also sets `basePath` and `assetPrefix` to `/react-next-blog` and disables image optimization (`images.unoptimized = true`) so the exported files work when hosted on GitHub Pages.
+
 ## Adding Posts and Pages
 
 1. Create a new Markdown file in `public/content/posts` (or `public/content/pages`).
