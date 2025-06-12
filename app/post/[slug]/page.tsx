@@ -1,17 +1,15 @@
-"use client";
-
-import React, { useEffect, useState } from 'react';
+import { promises as fs } from 'fs';
+import path from 'path';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Post } from '../../../types';
 import MarkdownRenderer from '../../../components/MarkdownRenderer';
 import { parseFrontMatter } from '../../../utils/frontMatterParser';
 
-// SVG Icons for Social Sharing (remain unchanged)
+// SVG Icons for Social Sharing
 const TwitterIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="currentColor" viewBox="0 0 24 24">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.992 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
 
@@ -34,6 +32,10 @@ const EmailIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) 
   </svg>
 );
 
+interface PageProps {
+  params: { slug: string };
+}
+
 const DEFAULT_POST_PAGE_VALUES: Omit<Post, 'slug'> = {
   title: 'Untitled Post',
   date: new Date().toISOString().split('T')[0],
@@ -44,139 +46,67 @@ const DEFAULT_POST_PAGE_VALUES: Omit<Post, 'slug'> = {
   markdownContent: '# Content Not Found\n\nSorry, the content for this post could not be loaded.',
 };
 
+async function getPostData(slug: string): Promise<Post> {
+  const filePath = path.join(process.cwd(), 'public', 'content', 'posts', `${slug}.md`);
+  try {
+    const rawContent = await fs.readFile(filePath, 'utf-8');
+    const { frontMatter, content } = parseFrontMatter(rawContent);
 
-const PostPage: React.FC = () => {
-  const params = useParams();
-  const slug = typeof params?.slug === 'string' ? params.slug : undefined;
-  const [post, setPost] = useState<Post | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!slug) {
-      setError('Post slug is missing.');
-      setIsLoading(false);
-      setPost({ ...DEFAULT_POST_PAGE_VALUES, slug: 'unknown-slug'});
-      return;
+    let tags: string[] = [];
+    if (frontMatter.tags) {
+      if (typeof frontMatter.tags === 'string') {
+        tags = frontMatter.tags.split(',').map(tag => tag.trim()).filter(Boolean);
+      } else if (Array.isArray(frontMatter.tags)) {
+        tags = frontMatter.tags.map(tag => String(tag).trim()).filter(Boolean);
+      }
     }
 
-    setIsLoading(true);
-    setError(null);
-    setPost(undefined); 
+    const post: Post = {
+      slug,
+      title: (frontMatter.title as string) || DEFAULT_POST_PAGE_VALUES.title,
+      date: (frontMatter.date as string) || DEFAULT_POST_PAGE_VALUES.date,
+      author: (frontMatter.author as string) || DEFAULT_POST_PAGE_VALUES.author,
+      excerpt: (frontMatter.excerpt as string) || DEFAULT_POST_PAGE_VALUES.excerpt,
+      tags: tags.length > 0 ? tags : DEFAULT_POST_PAGE_VALUES.tags,
+      imageUrl: (frontMatter.imageUrl as string) || DEFAULT_POST_PAGE_VALUES.imageUrl,
+      markdownContent: content || DEFAULT_POST_PAGE_VALUES.markdownContent,
+    };
 
-    fetch(`/content/posts/${slug}.md`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Failed to fetch markdown: ${response.statusText} (status: ${response.status})`);
-        }
-        return response.text();
-      })
-      .then(rawContent => {
-        const { frontMatter, content: markdownBody } = parseFrontMatter(rawContent); 
+    return post;
+  } catch (err) {
+    console.error('Error reading post content:', err);
+    return { ...DEFAULT_POST_PAGE_VALUES, slug, title: `Error: ${slug}` };
+  }
+}
 
-        // Ensure tags are always an array of strings from frontMatter
-        let tags: string[] = [];
-         if (frontMatter.tags) {
-            if (typeof frontMatter.tags === 'string') {
-                tags = frontMatter.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
-            } else if (Array.isArray(frontMatter.tags)) {
-                tags = frontMatter.tags.map(tag => String(tag).trim()).filter(tag => tag);
-            }
-        }
+export async function generateStaticParams() {
+  const postsDir = path.join(process.cwd(), 'public', 'content', 'posts');
+  try {
+    const files = await fs.readdir(postsDir);
+    return files
+      .filter(file => file.endsWith('.md'))
+      .map(file => ({ slug: file.replace(/\.md$/, '') }));
+  } catch (err) {
+    console.error('Error reading posts directory:', err);
+    return [];
+  }
+}
 
+const PostPage = async ({ params }: PageProps) => {
+  const post = await getPostData(params.slug);
 
-        const combinedPostData: Post = {
-          slug: slug,
-          title: (frontMatter.title as string) || DEFAULT_POST_PAGE_VALUES.title,
-          date: (frontMatter.date as string) || DEFAULT_POST_PAGE_VALUES.date,
-          author: (frontMatter.author as string) || DEFAULT_POST_PAGE_VALUES.author,
-          excerpt: (frontMatter.excerpt as string) || DEFAULT_POST_PAGE_VALUES.excerpt,
-          tags: tags.length > 0 ? tags : DEFAULT_POST_PAGE_VALUES.tags,
-          imageUrl: (frontMatter.imageUrl as string) || DEFAULT_POST_PAGE_VALUES.imageUrl,
-          markdownContent: markdownBody || DEFAULT_POST_PAGE_VALUES.markdownContent,
-        };
-        setPost(combinedPostData);
-      })
-      .catch(err => {
-        console.error('Error processing post content:', err);
-        setError(`Could not load post content. ${err.message}`);
-        setPost({ ...DEFAULT_POST_PAGE_VALUES, slug: slug, title: `Error: ${slug}` });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const postUrl = `/post/${post.slug}`;
+  const encodedPostUrl = encodeURIComponent(postUrl);
+  const encodedTitle = encodeURIComponent(post.title);
+  const encodedExcerpt = encodeURIComponent(post.excerpt);
 
-  }, [slug]);
-
-  const handleShare = (platform: 'twitter' | 'facebook' | 'linkedin' | 'email') => {
-    if (!post) return;
-
-    const postUrl = window.location.href; 
-    const encodedPostUrl = encodeURIComponent(postUrl);
-    const postTitle = encodeURIComponent(post.title);
-    const postExcerpt = encodeURIComponent(post.excerpt);
-
-    let shareUrl = '';
-
-    switch (platform) {
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodedPostUrl}&text=${postTitle}`;
-        break;
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedPostUrl}`;
-        break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedPostUrl}&title=${postTitle}&summary=${postExcerpt}`;
-        break;
-      case 'email':
-        window.location.href = `mailto:?subject=${postTitle}&body=${encodeURIComponent('Check out this post: ' + postUrl)}`;
-        return; 
-    }
-    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+  const shareLinks = {
+    twitter: `https://twitter.com/intent/tweet?url=${encodedPostUrl}&text=${encodedTitle}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedPostUrl}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedPostUrl}&title=${encodedTitle}&summary=${encodedExcerpt}`,
+    email: `mailto:?subject=${encodedTitle}&body=${encodedPostUrl}`,
   };
 
-
-  if (isLoading) { 
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-600"></div>
-        <p className="ml-4 text-lg text-gray-700">Loading post...</p>
-      </div>
-    );
-  }
-  
-  // If error state is set, or post is somehow still undefined after loading
-  if (error && (!post || post.title.startsWith('Error:'))) { 
-     return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-4xl font-bold text-red-600 mb-4">Error</h1>
-        <p className="text-lg text-gray-700 mb-6">{error || 'Post data could not be loaded.'}</p>
-        <Link
-          href="/"
-          className="bg-primary-600 text-white font-semibold px-6 py-3 rounded hover:bg-primary-700 transition-colors duration-300"
-        >
-          Back to Home
-        </Link>
-      </div>
-    );
-  }
-
-  // If no error, but post is somehow still undefined (should be caught by error state or default post)
-  if (!post) {
-      return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-4xl font-bold text-red-600 mb-4">Post Not Found</h1>
-        <p className="text-lg text-gray-700 mb-6">The requested post could not be found.</p>
-        <Link
-          href="/"
-          className="bg-primary-600 text-white font-semibold px-6 py-3 rounded hover:bg-primary-700 transition-colors duration-300"
-        >
-          Back to Home
-        </Link>
-      </div>
-    );
-  }
-  
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <article className="bg-white rounded-lg shadow-xl p-6 md:p-10">
@@ -212,49 +142,52 @@ const PostPage: React.FC = () => {
             />
           </div>
         )}
-        
+
         {post.markdownContent ? (
           <MarkdownRenderer content={post.markdownContent} />
         ) : (
-           <p className="text-gray-500">Content is not available for this post.</p>
+          <p className="text-gray-500">Content is not available for this post.</p>
         )}
 
-        {/* Social Share Section */}
         <div className="mt-10 pt-8 border-t border-gray-200">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">Share this post</h3>
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <button
-              onClick={() => handleShare('twitter')}
+            <a
+              href={shareLinks.twitter}
               aria-label="Share on Twitter"
               title="Share on Twitter"
               className="text-gray-500 hover:text-[#1DA1F2] p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1DA1F2] transition-colors duration-200"
+              target="_blank" rel="noopener noreferrer"
             >
               <TwitterIcon />
-            </button>
-            <button
-              onClick={() => handleShare('facebook')}
+            </a>
+            <a
+              href={shareLinks.facebook}
               aria-label="Share on Facebook"
               title="Share on Facebook"
               className="text-gray-500 hover:text-[#1877F2] p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1877F2] transition-colors duration-200"
+              target="_blank" rel="noopener noreferrer"
             >
               <FacebookIcon />
-            </button>
-            <button
-              onClick={() => handleShare('linkedin')}
+            </a>
+            <a
+              href={shareLinks.linkedin}
               aria-label="Share on LinkedIn"
               title="Share on LinkedIn"
               className="text-gray-500 hover:text-[#0A66C2] p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0A66C2] transition-colors duration-200"
+              target="_blank" rel="noopener noreferrer"
             >
               <LinkedInIcon />
-            </button>
-            <button
-              onClick={() => handleShare('email')}
+            </a>
+            <a
+              href={shareLinks.email}
               aria-label="Share via Email"
               title="Share via Email"
               className="text-gray-500 hover:text-primary-600 p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
+              target="_blank" rel="noopener noreferrer"
             >
               <EmailIcon />
-            </button>
+            </a>
           </div>
         </div>
 
