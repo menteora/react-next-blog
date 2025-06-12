@@ -61,7 +61,11 @@ const HomePage: React.FC = () => {
     loadPosts();
   }, []);
 
-  const heroImageUrl = isConfigLoading || configError ? null : config.homepageHeroImageUrl;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const rawHeroImage = isConfigLoading || configError ? null : config.homepageHeroImageUrl;
+  const heroImageUrl = rawHeroImage && !rawHeroImage.startsWith('http')
+    ? `${basePath}${rawHeroImage}`
+    : rawHeroImage;
 
   // Pagination logic
   const indexOfLastPost = currentPage * POSTS_PER_PAGE;
