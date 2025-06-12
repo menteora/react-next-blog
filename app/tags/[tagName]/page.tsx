@@ -5,6 +5,7 @@ import Link from 'next/link';
 import PostCard from '../../../components/PostCard';
 import { Post } from '../../../types';
 import { parseFrontMatter } from '../../../utils/frontMatterParser';
+import slugify from '../../../utils/slugify';
 
 interface PageProps {
   params: Promise<{ tagName: string }>;
@@ -64,16 +65,17 @@ export async function generateStaticParams() {
   posts.forEach(post => {
     post.tags.forEach(tag => tagSet.add(tag));
   });
-  return Array.from(tagSet).map(tag => ({ tagName: encodeURIComponent(tag) }));
+  return Array.from(tagSet).map(tag => ({ tagName: slugify(tag) }));
 }
 
 const PostsByTagPage = async ({ params }: PageProps) => {
   const { tagName } = await params;
-  const decodedTag = decodeURIComponent(tagName);
   const posts = await getAllPostsMetadata();
   const postsForTag = posts.filter(post =>
-    post.tags.map(t => t.toLowerCase()).includes(decodedTag.toLowerCase())
+    post.tags.some(t => slugify(t) === tagName)
   );
+  const displayTag =
+    postsForTag[0]?.tags.find(t => slugify(t) === tagName) || tagName;
   const sortedPosts = postsForTag.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
@@ -82,7 +84,7 @@ const PostsByTagPage = async ({ params }: PageProps) => {
     <div className="container mx-auto px-4 py-8">
       <header className="mb-10">
         <h1 className="text-4xl font-bold text-primary-800 mb-2">
-          Posts tagged with: <span className="text-primary-600">{decodedTag || 'Unknown Tag'}</span>
+          Posts tagged with: <span className="text-primary-600">{displayTag || 'Unknown Tag'}</span>
         </h1>
         <Link
           href="/tags"
