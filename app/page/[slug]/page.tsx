@@ -20,11 +20,11 @@ export async function generateStaticParams() {
 }
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 const GenericPage = async ({ params }: PageProps) => {
-  const slug = params.slug;
+  const { slug } = await params;
   const filePath = path.join(process.cwd(), 'public', 'content', 'pages', `${slug}.md`);
 
   try {

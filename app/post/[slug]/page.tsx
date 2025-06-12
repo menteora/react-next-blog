@@ -33,7 +33,7 @@ const EmailIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) 
 );
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 const DEFAULT_POST_PAGE_VALUES: Omit<Post, 'slug'> = {
@@ -93,7 +93,8 @@ export async function generateStaticParams() {
 }
 
 const PostPage = async ({ params }: PageProps) => {
-  const post = await getPostData(params.slug);
+  const { slug } = await params;
+  const post = await getPostData(slug);
 
   const postUrl = `/post/${post.slug}`;
   const encodedPostUrl = encodeURIComponent(postUrl);

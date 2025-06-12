@@ -7,7 +7,7 @@ import { Post } from '../../../types';
 import { parseFrontMatter } from '../../../utils/frontMatterParser';
 
 interface PageProps {
-  params: { tagName: string };
+  params: Promise<{ tagName: string }>;
 }
 
 const DEFAULT_POST_VALUES: Omit<Post, 'slug' | 'markdownContent'> = {
@@ -68,10 +68,11 @@ export async function generateStaticParams() {
 }
 
 const PostsByTagPage = async ({ params }: PageProps) => {
-  const tagName = decodeURIComponent(params.tagName);
+  const { tagName } = await params;
+  const decodedTag = decodeURIComponent(tagName);
   const posts = await getAllPostsMetadata();
   const postsForTag = posts.filter(post =>
-    post.tags.map(t => t.toLowerCase()).includes(tagName.toLowerCase())
+    post.tags.map(t => t.toLowerCase()).includes(decodedTag.toLowerCase())
   );
   const sortedPosts = postsForTag.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -81,7 +82,7 @@ const PostsByTagPage = async ({ params }: PageProps) => {
     <div className="container mx-auto px-4 py-8">
       <header className="mb-10">
         <h1 className="text-4xl font-bold text-primary-800 mb-2">
-          Posts tagged with: <span className="text-primary-600">{tagName || 'Unknown Tag'}</span>
+          Posts tagged with: <span className="text-primary-600">{decodedTag || 'Unknown Tag'}</span>
         </h1>
         <Link
           href="/tags"
