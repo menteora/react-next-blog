@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
 import { Post } from '../types';
+import slugify from '../utils/slugify';
 
 interface PostCardProps {
   post: Post;
@@ -47,7 +48,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           {post.tags.map(tag => (
             <Link
               key={tag}
-              href={`/tags/${encodeURIComponent(tag)}`}
+              href={`/tags/${slugify(tag)}`}
               className="inline-block bg-primary-100 text-primary-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 hover:text-primary-800 transition-colors duration-200"
               aria-label={`View posts tagged with ${tag}`}
             >

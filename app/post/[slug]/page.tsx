@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Post } from '../../../types';
 import MarkdownRenderer from '../../../components/MarkdownRenderer';
 import { parseFrontMatter } from '../../../utils/frontMatterParser';
+import slugify from '../../../utils/slugify';
 
 // SVG Icons for Social Sharing
 const TwitterIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) => (
@@ -121,7 +122,7 @@ const PostPage = async ({ params }: PageProps) => {
               {post.tags.map(tag => (
                 <Link
                   key={tag}
-                  href={`/tags/${encodeURIComponent(tag)}`}
+                  href={`/tags/${slugify(tag)}`}
                   className="inline-block bg-primary-100 text-primary-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 hover:text-primary-800 transition-colors duration-200"
                   aria-label={`View posts tagged with ${tag}`}
                 >
