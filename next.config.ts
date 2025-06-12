@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   basePath: "/react-next-blog",
   assetPrefix: isProd ? "/react-next-blog/" : undefined,
+  trailingSlash: true,   
   images: {
     // GitHub Pages can't handle dynamic image optimization
     unoptimized: true,
