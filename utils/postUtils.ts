@@ -13,7 +13,8 @@ const DEFAULT_POST_VALUES: Omit<Post, 'slug' | 'markdownContent'> = {
 
 export async function fetchPostMetadataBySlug(slug: string): Promise<Omit<Post, 'markdownContent'>> {
   try {
-    const response = await fetch(`/content/posts/${slug}.md`);
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    const response = await fetch(`${basePath}/content/posts/${slug}.md`);
     if (!response.ok) {
       throw new Error(`File not found or unreadable (status: ${response.status})`);
     }
