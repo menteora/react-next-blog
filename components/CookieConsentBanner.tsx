@@ -20,8 +20,8 @@ const CookieConsentBanner: React.FC = () => {
     >
       <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
         <p className="text-sm mb-3 sm:mb-0 sm:mr-4">
-          Utilizziamo i cookie per migliorare la tua esperienza e per finalità analitiche, previo tuo consenso. 
-          Per maggiori dettagli, consulta la nostra{' '}
+          Usiamo cookie tecnici indispensabili al funzionamento del sito e, solo se acconsenti, cookie di analytics per statistiche anonime.
+          Per maggiori dettagli consulta la nostra{' '}
           <Link href="/page/privacy-policy" className="underline hover:text-primary-200">
             Informativa Privacy e Cookie Policy
           </Link>.
