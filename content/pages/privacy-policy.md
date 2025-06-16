@@ -58,3 +58,9 @@ Fuorviante, invece, è intendere gli analytics come cookie tecnici, in quanto mo
 Infine, il Garante Privacy parla di analytics in generale, quindi non solo di Google Analytics e del mondo Google, in quanto ne esistono tanti altri per i quali valgono le stesse regole.
 
 Il nostro consiglio finale è di trattare con molta attenzione i cookie analytics, essendo un terreno piuttosto insidioso, per i quali sarebbe opportuno almeno un consulto con un esperto in merito, onde evitare salate sanzioni da parte dell’Autorità garante.
+
+## Cookie utilizzati su questo sito
+
+Questo sito utilizza cookie tecnici necessari al suo funzionamento e, previo tuo consenso, cookie di **analytics** per raccogliere statistiche anonime sull'utilizzo delle pagine. La tua scelta viene memorizzata tramite un cookie tecnico con durata di sei mesi.
+
+Puoi modificare o revocare in ogni momento il consenso cliccando sul pulsante **"Gestisci preferenze cookie"** presente nel footer del sito.
