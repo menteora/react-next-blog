@@ -14,6 +14,19 @@ interface CookieConsentContextType {
 
 const CookieConsentContext = createContext<CookieConsentContextType | undefined>(undefined);
 
+// Utility helpers to read and write the consent cookie
+const getCookie = (name: string): string | null => {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[1]) : null;
+};
+
+const setCookie = (name: string, value: string, days = 180) => {
+  if (typeof document === 'undefined') return;
+  const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+};
+
 // Helper function to safely call gtag for consent updates
 const safeGtagConsentUpdate = (consentArgs: Record<string, 'granted' | 'denied'>) => {
   if (window.gtag) {
@@ -32,7 +45,7 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
   const { config: siteConfig, isLoading: isSiteConfigLoading } = useSiteConfig();
 
   const initializeConsent = useCallback(() => {
-    const storedConsent = localStorage.getItem('cookieConsent');
+    const storedConsent = getCookie('cookieConsent');
     const gaId = siteConfig.gaMeasurementId;
 
     if (storedConsent === 'true') {
@@ -65,7 +78,7 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     safeGtagConsentUpdate({ 'analytics_storage': 'granted' });
     setConsentGiven(true);
     setShowBanner(false);
-    localStorage.setItem('cookieConsent', 'true');
+    setCookie('cookieConsent', 'true');
     if (gaId && !isSiteConfigLoading && window.gtag) {
       initGA(gaId);
     }
@@ -75,7 +88,7 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     safeGtagConsentUpdate({ 'analytics_storage': 'denied' });
     setConsentGiven(false);
     setShowBanner(false);
-    localStorage.setItem('cookieConsent', 'false');
+    setCookie('cookieConsent', 'false');
     document.getElementById('ga-script')?.remove();
     document.getElementById('ga-init')?.remove();
   };
