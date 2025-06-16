@@ -9,6 +9,7 @@ interface CookieConsentContextType {
   showBanner: boolean;
   giveConsent: () => void;
   declineConsent: () => void;
+  openBanner: () => void;
 }
 
 const CookieConsentContext = createContext<CookieConsentContextType | undefined>(undefined);
@@ -75,10 +76,16 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     setConsentGiven(false);
     setShowBanner(false);
     localStorage.setItem('cookieConsent', 'false');
+    document.getElementById('ga-script')?.remove();
+    document.getElementById('ga-init')?.remove();
+  };
+
+  const openBanner = () => {
+    setShowBanner(true);
   };
 
   return (
-    <CookieConsentContext.Provider value={{ consentGiven, showBanner, giveConsent, declineConsent }}>
+    <CookieConsentContext.Provider value={{ consentGiven, showBanner, giveConsent, declineConsent, openBanner }}>
       {children}
     </CookieConsentContext.Provider>
   );
