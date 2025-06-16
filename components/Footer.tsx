@@ -12,7 +12,10 @@ const Footer: React.FC = () => {
       <p className="text-sm mt-1">
         Powered by React, Tailwind CSS, and your Markdown!{' '}
         <Link href="/page/privacy-policy" className="underline hover:text-primary-300">
-          Informativa Privacy e Cookie Policy
+          Informativa Privacy
+        </Link>{' | '}
+        <Link href="/page/cookie-policy" className="underline hover:text-primary-300 ml-1">
+          Cookie Policy
         </Link>
       </p>
       <button

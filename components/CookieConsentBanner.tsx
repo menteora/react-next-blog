@@ -22,8 +22,8 @@ const CookieConsentBanner: React.FC = () => {
         <p className="text-sm mb-3 sm:mb-0 sm:mr-4">
           Usiamo cookie tecnici indispensabili al funzionamento del sito e, solo se acconsenti, cookie di analytics per statistiche anonime.
           Per maggiori dettagli consulta la nostra{' '}
-          <Link href="/page/privacy-policy" className="underline hover:text-primary-200">
-            Informativa Privacy e Cookie Policy
+          <Link href="/page/cookie-policy" className="underline hover:text-primary-200">
+            Cookie Policy
           </Link>.
         </p>
         <div className="flex space-x-3">

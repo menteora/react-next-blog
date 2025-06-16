@@ -1,66 +1,45 @@
 ---
-title: Informativa sulla Privacy e Cookie Policy
+title: Privacy Policy
 ---
 
-## Informativa sul Trattamento dei Dati Personali e Cookie Policy
+## Privacy Policy (Informativa Privacy del blog)
 
-Recente il Garante Italiano si è pronunciato contro l'uso degli Analytics, contestandone il trasferimento dei dati degli utenti negli Stati Uniti.
-Per poter continuare ad utilizzare Google Analytics sul proprio sito è necessario:
+### Titolare del Trattamento
 
-*   avere installato Google Analytics 4
-*   chiedere il consenso all'utente (Google Analytics non è più assimilabile ad un cookie tecnico)
-*   utilizzare un sistema di "proxificazione dei dati" per inviare dati anonimi ai server di Google
+Il titolare del trattamento dei dati personali è il gestore di questo blog, [Nome Cognome]. Esempio: Mario Rossi, residente in Via Roma 123, 00100 Roma. È possibile contattare il titolare per qualsiasi richiesta inerente la privacy all’indirizzo email: nome.cognome@email.com.
 
-Abbiamo realizzato quindi My Agile Pixel: la soluzione definitiva al blocco di Analytics.
-Clicca qui e vai sul sito per scoprire come configurare Google Analytics con My Agile Pixel e continuare ad utilizzarlo sul tuo sito.
+### Tipologie di dati raccolti
 
-**Si mantiene il testo sottostante come riferimento.**
+Questo è un blog personale di tipo informativo che non prevede registrazione di utenti, form di contatto, newsletter o altre raccolte dirette di dati personali. I dati trattati si limitano quindi a:
 
----
+- **Dati di navigazione tecnici:** i sistemi informatici che gestiscono il sito raccolgono automaticamente, nel corso del normale uso di Internet, alcuni dati la cui trasmissione è implicita nell’uso dei protocolli web. Queste informazioni includono, ad esempio, gli indirizzi IP o i nomi a dominio dei dispositivi utilizzati per connettersi al sito. Tali dati sono utilizzati al solo scopo di controllare il corretto funzionamento del sito e ottenere statistiche anonime sul suo utilizzo e vengono eliminati entro pochi mesi.
+- **Dati statistici aggregati:** attraverso cookie analytics di terza parte (Google Analytics), il blog raccoglie dati relativi al traffico in forma aggregata e anonima, previo consenso dell’utente. Questi dati statistici comprendono, ad esempio, il numero di visitatori, le pagine più visualizzate e il tipo di browser o dispositivo utilizzato. Google Analytics è configurato in modo da mascherare parte dell’indirizzo IP e a non incrociare tali dati con altre informazioni.
+- **Eventuali comunicazioni volontarie:** qualora l’utente invii comunicazioni al Titolare (ad esempio via email), saranno acquisiti i dati personali forniti (come l’indirizzo email e il nome) e utilizzati esclusivamente per rispondere alle richieste inoltrate.
 
-Togliamoci subito il dente:
-i cookie analitici sono di **PROFILAZIONE**, e questo è indiscutibile.
+### Finalità del trattamento
 
-### Premessa
-Nella FAQ del Garante Privacy numero 4 alla domanda «I cookie analytics sono cookie “tecnici”?», la risposta è perentoria: "**NO**"
+- **Erogazione del servizio:** utilizziamo i dati di navigazione tecnici in misura strettamente necessaria per consentire all’utente di accedere alle pagine del blog e fruire dei contenuti richiesti.
+- **Statistica anonima:** i dati aggregati raccolti tramite cookie di Google Analytics vengono trattati allo scopo di analizzare l’uso del sito da parte degli utenti e migliorare i contenuti offerti. Questa analisi è svolta in modo anonimo e solo con il consenso dell’utente.
+- **Riscontro a richieste:** eventuali dati forniti volontariamente dall’utente saranno trattati esclusivamente per dare seguito alla richiesta dell’utente stesso.
+- **Obblighi di legge e tutela dei diritti:** ove necessario, i dati potrebbero essere trattati per adempiere ad obblighi previsti da leggi o regolamenti o per far valere o difendere un diritto in sede giudiziaria.
 
-Nel secondo comma della stessa FAQ viene riportato quanto segue:
+### Base giuridica del trattamento
 
-“Qualora, invece, l’elaborazione di tali analisi statistiche sia affidata a soggetti terzi, i dati degli utenti dovranno essere preventivamente minimizzati e non potranno essere combinati con altre elaborazioni né trasmessi ad ulteriori terzi. A queste condizioni, per i cookie analytics valgono le stesse regole, in tema di informativa e consenso, previste per i cookie tecnici.”
+- **Esecuzione di un servizio/contratto (Art.6(1)(b) GDPR):** la fornitura dei contenuti richiesti dall’utente attraverso il sito.
+- **Consenso dell’interessato (Art.6(1)(a) GDPR):** l’installazione e l’uso dei cookie di Google Analytics avviene solo previa esplicita autorizzazione dell’utente tramite il banner cookie.
+- **Legittimo interesse del Titolare (Art.6(1)(f) GDPR):** i dati di navigazione in forma aggregata possono essere trattati per garantire la sicurezza del sito e migliorare il servizio.
+- **Obbligo di legge (Art.6(1)(c) GDPR):** ove il trattamento dei dati risponda a obblighi legali.
 
-Che, in modo molto più semplice, significa che se impostiamo gli analytics utilizzando il principio di “privacy by default”, cioè di minimizzazione dei dati, possiamo prevedere informative e consenso con le stesse regole che usiamo per quelli tecnici, pur non essendo comunque tali.
+### Conservazione dei dati
 
-Nella FAQ numero 5, invece, alla domanda
-«È necessario il consenso dell’utente per l’installazione dei cookie sul suo terminale?», la risposta è:
-"Dipende dalle finalità per le quali i cookie vengono usati e, quindi, se sono cookie "tecnici" o di "profilazione".
+I dati personali sono conservati per il tempo strettamente necessario al raggiungimento delle finalità sopra indicate. I log di accesso al server vengono conservati per un periodo massimo di qualche mese e poi cancellati. I dati statistici di Google Analytics sono conservati per un periodo massimo di 14 mesi. Eventuali informazioni fornite volontariamente dall’utente saranno conservate per il tempo necessario a evadere la richiesta.
 
-Ovvero, per l’installazione dei cookie tecnici e di quelli analytics impostati secondo la minimizzazione, non è richiesto il consenso degli utenti, mentre è comunque sempre necessario dare l'informativa (art. 13 del Regolamento Ue 2016/679).
+### Diritti dell’utente
 
-I cookie di profilazione veri e propri, o gli altri strumenti di tracciamento, invece, possono essere utilizzati soltanto se l’utente abbia espresso il proprio consenso dopo essere stato informato con modalità semplificate.”
+Gli utenti hanno il diritto di accedere ai propri dati personali, chiederne la rettifica o la cancellazione, limitarne il trattamento, opporsi al trattamento e richiederne la portabilità. È inoltre possibile revocare il consenso prestato in qualsiasi momento e proporre reclamo a un’Autorità di controllo qualora si ritenga che il trattamento violi la normativa vigente.
 
-Nella FAQ numero 6, alla domanda
-«In che modo il titolare del sito deve fornire l’informativa semplificata e richiedere il consenso dei cookie di profilazione?», la risposta è:
-[…] "Pur nel rispetto dell’accountability del titolare e dunque della sua libertà di scelta delle misure e delle soluzioni che meglio garantiscano la conformità agli obblighi di legge, il Garante tuttavia suggerisce l’adozione di un meccanismo per il quale, nel momento in cui l’utente accede a un sito web (sulla home page o su qualunque altra pagina), compaia immediatamente un banner contenente una prima informativa "breve", la richiesta di consenso all’uso dei cookie e un link per accedere ad un’informativa più "estesa". In questa pagina, l’utente potrà reperire maggiori e più dettagliate informazioni sui cookie scegliere quali specifici cookie autorizzare."
+### Modalità di esercizio dei diritti
 
-Quindi, fatte queste doverose premesse, non c’è dubbio nell’affermare che i cookie analytics sono cookie di profilazione e non tecnici, che se installati utilizzando il principio di minimizzazione dei dati possono essere utilizzati anche senza consenso, ma che, essendo dei cookie di profilazione, richiedono sempre una informativa semplificata che solitamente viene data tramite un banner privacy.
+È possibile esercitare i propri diritti contattando il Titolare agli estremi indicati sopra. L’esercizio dei diritti è gratuito e verrà fornito riscontro entro un mese dalla richiesta, salvo proroghe nei casi previsti dalla legge.
 
-Più specificatamente, se non installiamo cookie sul sito (ad eccezione di quelli tecnici per il funzionamento del sito), possiamo non utilizzare un sistema “banner”, ma occorre comunque specificarlo nell’informativa privacy del sito stesso, conosciuta ai più come Privacy Policy.
-
-Se, invece, utilizziamo degli analytics, cookie definiti dal Garante come di Profilazione, dobbiamo utilizzare un banner per una informativa breve. Possiamo però far partire gli analytics senza consenso, se utilizzati in regime di minimizzazione dei dati.
-
-### In Sintesi
-Come anticipato all’inizio, i cookie analytics sono quindi cookie di profilazione, come definito dall' Autorità Garante per la protezione dei dati personali.
-
-Da notare che inizialmente il Garante aveva dichiarato che tutti gli analytics erano di profilazione, anche in forma anonima, rettificando in seguito (correttamente, a nostro avviso), l’interpretazione della minimizzazione dei dati, permettendo, in caso di minimizzazione - e quindi anonimizzazione dei dati - di attivarli senza il pregresso consenso dell’utente.
-
-Fuorviante, invece, è intendere gli analytics come cookie tecnici, in quanto molti gestori di siti, con questa visione, potrebbero configurarli in maniera errata e farli diventare traccianti di dati personali.
-
-Infine, il Garante Privacy parla di analytics in generale, quindi non solo di Google Analytics e del mondo Google, in quanto ne esistono tanti altri per i quali valgono le stesse regole.
-
-Il nostro consiglio finale è di trattare con molta attenzione i cookie analytics, essendo un terreno piuttosto insidioso, per i quali sarebbe opportuno almeno un consulto con un esperto in merito, onde evitare salate sanzioni da parte dell’Autorità garante.
-
-## Cookie utilizzati su questo sito
-
-Questo sito utilizza cookie tecnici necessari al suo funzionamento e, previo tuo consenso, cookie di **analytics** per raccogliere statistiche anonime sull'utilizzo delle pagine. La tua scelta viene memorizzata tramite un cookie tecnico con durata di sei mesi.
-
-Puoi modificare o revocare in ogni momento il consenso cliccando sul pulsante **"Gestisci preferenze cookie"** presente nel footer del sito.
+Il Titolare si impegna a proteggere la privacy degli utenti e a garantire che i dati personali siano trattati in conformità alla normativa vigente. Questa informativa potrà essere soggetta ad aggiornamenti periodici; le nuove versioni saranno pubblicate su questa pagina.
