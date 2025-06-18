@@ -5,7 +5,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Noto Sans"', 'sans-serif'],
+        newsreader: ['Newsreader', 'serif'],
+      },
       colors: {
+        brand: {
+          dark: '#111418',
+          muted: '#60748a',
+          light: '#f0f2f5',
+        },
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',

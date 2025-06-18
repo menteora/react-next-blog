@@ -104,73 +104,81 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {heroImageUrl && (
-        <section className="mb-12 rounded-lg overflow-hidden shadow-xl">
-          <Image
-            src={heroImageUrl}
-            alt="Blog hero banner"
-            width={1200}
-            height={400}
-            className="w-full h-auto max-h-[300px] md:max-h-[400px] object-cover"
-          />
-        </section>
-      )}
+    <div className="px-6 md:px-20 flex justify-center py-5">
+      <div className="flex flex-col max-w-[960px] w-full">
+        {heroImageUrl && (
+          <section className="mb-6 relative rounded-lg overflow-hidden min-h-[218px] @container">
+            <Image
+              src={heroImageUrl}
+              alt="Blog hero banner"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 960px"
+              priority={false}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="relative flex p-4">
+              <p className="text-white tracking-light text-[28px] font-bold leading-tight">Welcome to the Blog</p>
+            </div>
+          </section>
+        )}
 
-      <header className="mb-12 text-center">
-        <h1 className="text-5xl font-extrabold text-primary-800">Welcome to the Blog</h1>
-        <p className="text-xl text-gray-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
-      </header>
-      
-      {currentPosts.length > 0 ? (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <header className="mb-8 text-center">
+          <p className="text-brand-muted text-base">Discover insights and stories on web development, technology, and more.</p>
+        </header>
+
+        {currentPosts.length > 0 ? (
+          <>
             {currentPosts.map(post => (
-              <PostCard key={post.slug} post={post as Post} /> 
+              <div key={post.slug} className="p-4">
+                <PostCard post={post as Post} />
+              </div>
             ))}
-          </div>
-          {totalPages > 1 && (
-            <nav aria-label="Posts pagination" className="mt-12 flex justify-center items-center space-x-2">
-              <button
-                onClick={() => paginate(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                aria-label="Previous page"
-              >
-                &larr; Previous
-              </button>
-              {pageNumbers.map(number => (
+            {totalPages > 1 && (
+              <nav aria-label="Posts pagination" className="mt-4 flex items-center justify-center gap-1">
                 <button
-                  key={number}
-                  onClick={() => paginate(number)}
-                  className={`px-4 py-2 rounded transition-colors ${
-                    currentPage === number
-                      ? 'bg-primary-800 text-white font-bold ring-2 ring-primary-500'
-                      : 'bg-primary-200 text-primary-700 hover:bg-primary-300'
-                  }`}
-                  aria-current={currentPage === number ? "page" : undefined}
-                  aria-label={`Go to page ${number}`}
+                  onClick={() => paginate(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="flex size-10 items-center justify-center disabled:text-gray-300"
+                  aria-label="Previous page"
                 >
-                  {number}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+                  </svg>
                 </button>
-              ))}
-              <button
-                onClick={() => paginate(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                aria-label="Next page"
-              >
-                Next &rarr;
-              </button>
-            </nav>
-          )}
-        </>
-      ) : (
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold text-gray-700">No posts yet!</h2>
-          <p className="text-gray-500 mt-2">Check back soon for new content, or ensure the post manifest file is configured if posts exist.</p>
-        </div>
-      )}
+                {pageNumbers.map(number => (
+                  <button
+                    key={number}
+                    onClick={() => paginate(number)}
+                    className={`text-sm flex size-10 items-center justify-center rounded-full ${
+                      currentPage === number ? 'font-bold bg-brand-light' : ''
+                    }`}
+                    aria-current={currentPage === number ? 'page' : undefined}
+                    aria-label={`Go to page ${number}`}
+                  >
+                    {number}
+                  </button>
+                ))}
+                <button
+                  onClick={() => paginate(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="flex size-10 items-center justify-center disabled:text-gray-300"
+                  aria-label="Next page"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+                  </svg>
+                </button>
+              </nav>
+            )}
+          </>
+        ) : (
+          <div className="text-center py-12">
+            <h2 className="text-2xl font-semibold text-gray-700">No posts yet!</h2>
+            <p className="text-gray-500 mt-2">Check back soon for new content, or ensure the post manifest file is configured if posts exist.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
