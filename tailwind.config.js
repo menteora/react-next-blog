@@ -20,6 +20,10 @@ module.exports = {
           950: '#172554',
         },
       },
+      fontFamily: {
+        sans: ['Noto Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['Newsreader', 'serif'],
+      },
     },
   },
   plugins: [],

@@ -19,22 +19,20 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       : post.imageUrl;
 
   return (
-    <article className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl duration-300 flex flex-col">
+    <article className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-row md:flex-col items-center overflow-hidden">
       {post.imageUrl && (
-        <Link href={`/post/${post.slug}`} aria-hidden="true" tabIndex={-1}>
-          <div className="relative w-full h-48">
-            <Image
-              src={imageSrc as string}
-              alt={`Featured image for ${post.title}`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 100vw, 33vw"
-              priority={false}
-            />
-          </div>
+        <Link href={`/post/${post.slug}`} aria-hidden="true" tabIndex={-1} className="relative flex-shrink-0 w-24 h-24 md:w-full md:h-48 md:rounded-t-xl">
+          <Image
+            src={imageSrc as string}
+            alt={`Featured image for ${post.title}`}
+            fill
+            className="object-cover rounded-lg md:rounded-none md:rounded-t-xl"
+            sizes="(max-width: 768px) 96px, (max-width: 1024px) 50vw, 33vw"
+            priority={false}
+          />
         </Link>
       )}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-4 md:p-6 flex flex-col flex-grow">
         <h2 className="text-2xl font-bold text-primary-700 mb-2">
           <Link href={`/post/${post.slug}`} className="hover:underline">
             {post.title}
