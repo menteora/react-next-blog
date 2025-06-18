@@ -106,29 +106,37 @@ const HomePage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       {heroImageUrl && (
-        <section className="mb-12 rounded-lg overflow-hidden shadow-xl">
+        <section className="mb-8 relative rounded-xl overflow-hidden group min-h-[280px] md:min-h-[400px]">
           <Image
             src={heroImageUrl}
             alt="Blog hero banner"
-            width={1200}
-            height={400}
-            className="w-full h-auto max-h-[300px] md:max-h-[400px] object-cover"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" aria-hidden="true" />
+          <div className="relative z-10 flex flex-col justify-end h-full p-6 text-white">
+            <h1 className="text-3xl md:text-5xl font-bold drop-shadow-md group-hover:text-[var(--primary-color)] transition-colors">
+              Welcome to the Blog
+            </h1>
+            <p className="text-sm md:text-lg text-gray-200 mt-1 drop-shadow-sm">
+              Discover insights and stories on web development, technology, and more.
+            </p>
+          </div>
         </section>
       )}
-
-      <header className="mb-12 text-center">
-        <h1 className="text-5xl font-extrabold text-primary-800">Welcome to the Blog</h1>
-        <p className="text-xl text-gray-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
-      </header>
       
       {currentPosts.length > 0 ? (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentPosts.map(post => (
-              <PostCard key={post.slug} post={post as Post} /> 
-            ))}
-          </div>
+          <section className="mt-10">
+            <h2 className="text-2xl font-semibold text-[var(--text-primary)] px-2 md:px-0 pb-4">Latest Posts</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {currentPosts.map(post => (
+                <PostCard key={post.slug} post={post as Post} />
+              ))}
+            </div>
+          </section>
           {totalPages > 1 && (
             <nav aria-label="Posts pagination" className="mt-12 flex justify-center items-center space-x-2">
               <button
