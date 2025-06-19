@@ -5,6 +5,7 @@ import CookieConsentBanner from "../components/CookieConsentBanner";
 import AnalyticsRouteChangeTracker from "../components/AnalyticsRouteChangeTracker";
 import GoogleAnalyticsLoader from "../components/GoogleAnalyticsLoader";
 import Footer from "../components/Footer";
+import ThemeScript from "../components/ThemeScript";
 import { SiteConfigProvider } from "../contexts/SiteConfigContext";
 import { CookieConsentProvider } from "../contexts/CookieConsentContext";
 import { ThemeProvider } from "../contexts/ThemeContext";
@@ -22,13 +23,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-white text-gray-900 dark:bg-black dark:text-gray-100">
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="antialiased">
         <ThemeProvider>
           <SiteConfigProvider>
             <CookieConsentProvider>
               <div className="flex flex-col min-h-screen">
                 <Navbar />
-                <main className="flex-grow bg-gray-50 dark:bg-gray-900 py-8">
+                <main className="flex-grow py-8">
                   <AnalyticsRouteChangeTracker />
                   <GoogleAnalyticsLoader />
                   {children}
