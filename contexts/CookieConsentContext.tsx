@@ -27,6 +27,23 @@ const setCookie = (name: string, value: string, days = 180) => {
   document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
 };
 
+const deleteCookie = (name: string) => {
+  if (typeof document === 'undefined') return;
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Lax`;
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; SameSite=Lax`;
+};
+
+const clearAnalyticsCookies = () => {
+  if (typeof document === 'undefined') return;
+  const analyticsCookiePatterns = [/^_ga/, /^_gid$/, /^_gat/];
+  document.cookie.split(';').forEach((cookie) => {
+    const [cookieName] = cookie.trim().split('=');
+    if (analyticsCookiePatterns.some((pat) => pat.test(cookieName))) {
+      deleteCookie(cookieName);
+    }
+  });
+};
+
 // Helper function to safely call gtag for consent updates
 const safeGtagConsentUpdate = (consentArgs: Record<string, 'granted' | 'denied'>) => {
   if (window.gtag) {
@@ -89,6 +106,7 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     setConsentGiven(false);
     setShowBanner(false);
     setCookie('cookieConsent', 'false');
+    clearAnalyticsCookies();
     document.getElementById('ga-script')?.remove();
     document.getElementById('ga-init')?.remove();
   };
