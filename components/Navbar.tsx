@@ -33,8 +33,6 @@ const Navbar: React.FC = () => {
     { to: "/", text: "Home" },
     { to: "/tags", text: "Tags" },
     { to: "/page/about", text: "About" },
-    { to: "/page/privacy-policy", text: "Informativa Privacy" },
-    { to: "/page/cookie-policy", text: "Cookie Policy" },
   ];
 
   const displayTitle = isConfigLoading ? "Loading..." : (configError ? "Blog" : config.blogTitle);
