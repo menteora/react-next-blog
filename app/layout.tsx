@@ -5,6 +5,7 @@ import CookieConsentBanner from "../components/CookieConsentBanner";
 import AnalyticsRouteChangeTracker from "../components/AnalyticsRouteChangeTracker";
 import GoogleAnalyticsLoader from "../components/GoogleAnalyticsLoader";
 import Footer from "../components/Footer";
+import PrelineInit from "../components/PrelineInit";
 import ThemeScript from "../components/ThemeScript";
 import { SiteConfigProvider } from "../contexts/SiteConfigContext";
 import { CookieConsentProvider } from "../contexts/CookieConsentContext";
@@ -35,6 +36,7 @@ export default function RootLayout({
                 <main className="flex-grow py-8">
                   <AnalyticsRouteChangeTracker />
                   <GoogleAnalyticsLoader />
+                  <PrelineInit />
                   {children}
                 </main>
                 <CookieConsentBanner />
