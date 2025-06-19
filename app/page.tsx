@@ -118,8 +118,8 @@ const HomePage: React.FC = () => {
       )}
 
       <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold text-gray-900">Welcome to the Blog</h1>
-        <p className="text-lg text-gray-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
+        <h1 className="text-4xl font-bold text-primary-800">Welcome to the Blog</h1>
+        <p className="text-lg text-primary-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
       </header>
       
       {currentPosts.length > 0 ? (
