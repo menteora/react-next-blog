@@ -21,13 +21,13 @@ const Navbar: React.FC = () => {
 
   const getNavLinkClass = (path: string) =>
     pathname === path
-      ? "text-primary-200 border-b-2 border-primary-200 pb-1"
-      : "hover:text-primary-200 transition-colors pb-1 border-b-2 border-transparent hover:border-primary-300";
+      ? "text-primary-800 border-b-2 border-primary-800 pb-1"
+      : "hover:text-primary-600 transition-colors pb-1 border-b-2 border-transparent hover:border-primary-400";
 
   const getMobileNavLinkClass = (path: string) =>
     pathname === path
-      ? "block py-2 px-3 text-primary-200 bg-primary-600 rounded"
-      : "block py-2 px-3 hover:bg-primary-600 hover:text-primary-100 rounded transition-colors";
+      ? "block py-2 px-3 text-primary-800 bg-primary-100 rounded"
+      : "block py-2 px-3 hover:bg-primary-100 hover:text-primary-800 rounded transition-colors";
 
   const navLinks = [
     { to: "/", text: "Home" },
@@ -40,9 +40,9 @@ const Navbar: React.FC = () => {
   const displayTitle = isConfigLoading ? "Loading..." : (configError ? "Blog" : config.blogTitle);
 
   return (
-    <nav className="bg-primary-700 text-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold hover:text-primary-200 transition-colors" aria-label="Go to homepage">
+        <Link href="/" className="text-2xl font-bold text-primary-800 hover:text-primary-600 transition-colors" aria-label="Go to homepage">
           {displayTitle}
         </Link>
 
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
             aria-label="Toggle navigation menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
-            className="p-2 rounded-md text-primary-200 hover:text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            className="p-2 rounded-md text-primary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
           >
             {isMobileMenuOpen ? (
               // X icon
@@ -81,7 +81,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-primary-700 border-t border-primary-600">
+        <div id="mobile-menu" className="md:hidden bg-white border-t border-gray-200">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map(link => (
               <Link

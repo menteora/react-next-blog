@@ -84,11 +84,11 @@ const PostsByTagPage = async ({ params }: PageProps) => {
     <div className="container mx-auto px-4 py-8">
       <header className="mb-10">
         <h1 className="text-4xl font-bold text-primary-800 mb-2">
-          Posts tagged with: <span className="text-primary-600">{displayTag || 'Unknown Tag'}</span>
+          Posts tagged with: <span className="text-primary-700">{displayTag || 'Unknown Tag'}</span>
         </h1>
         <Link
           href="/tags"
-          className="text-primary-600 hover:text-primary-800 hover:underline font-semibold transition-colors"
+          className="text-primary-700 hover:text-primary-800 hover:underline font-semibold transition-colors"
         >
           &larr; View all tags
         </Link>
@@ -106,7 +106,7 @@ const PostsByTagPage = async ({ params }: PageProps) => {
           <p className="text-gray-500 mt-2">Try browsing other tags or viewing all posts. Ensure the post manifest is configured if you expect posts here.</p>
           <Link
             href="/"
-            className="mt-6 inline-block bg-primary-600 text-white font-semibold px-6 py-3 rounded hover:bg-primary-700 transition-colors duration-300"
+            className="mt-6 inline-block bg-primary-700 text-white font-semibold px-6 py-3 rounded hover:bg-primary-800 transition-colors"
           >
             View All Posts
           </Link>

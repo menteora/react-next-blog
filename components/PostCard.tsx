@@ -19,7 +19,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       : post.imageUrl;
 
   return (
-    <article className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl duration-300 flex flex-col">
+    <article className="bg-white border rounded-lg overflow-hidden hover:shadow-md transition-shadow flex flex-col">
       {post.imageUrl && (
         <Link href={`/post/${post.slug}`} aria-hidden="true" tabIndex={-1}>
           <div className="relative w-full h-48">
@@ -35,7 +35,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         </Link>
       )}
       <div className="p-6 flex flex-col flex-grow">
-        <h2 className="text-2xl font-bold text-primary-700 mb-2">
+        <h2 className="text-2xl font-bold text-primary-800 mb-2">
           <Link href={`/post/${post.slug}`} className="hover:underline">
             {post.title}
           </Link>
@@ -49,7 +49,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
             <Link
               key={tag}
               href={`/tags/${slugify(tag)}`}
-              className="inline-block bg-primary-100 text-primary-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 hover:text-primary-800 transition-colors duration-200"
+              className="inline-block bg-primary-100 text-primary-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 transition-colors duration-200"
               aria-label={`View posts tagged with ${tag}`}
             >
               {tag}
@@ -59,7 +59,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <div className="mt-auto">
           <Link
             href={`/post/${post.slug}`}
-            className="inline-block bg-primary-600 text-white font-semibold px-4 py-2 rounded hover:bg-primary-700 transition-colors duration-300"
+            className="inline-block bg-primary-700 text-white font-semibold px-4 py-2 rounded hover:bg-primary-800 transition-colors duration-300"
           >
             Read More &rarr;
           </Link>

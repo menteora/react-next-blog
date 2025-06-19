@@ -112,7 +112,7 @@ const PostPage = async ({ params }: PageProps) => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <article className="bg-white rounded-lg shadow-xl p-6 md:p-10">
+      <article className="bg-white border rounded-lg p-6 md:p-10">
         <header className="mb-8 border-b pb-6 border-gray-200">
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary-800 mb-3">{post.title}</h1>
           <div className="text-md text-gray-500">
@@ -124,7 +124,7 @@ const PostPage = async ({ params }: PageProps) => {
                 <Link
                   key={tag}
                   href={`/tags/${slugify(tag)}`}
-                  className="inline-block bg-primary-100 text-primary-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 hover:text-primary-800 transition-colors duration-200"
+                  className="inline-block bg-primary-100 text-primary-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 transition-colors duration-200"
                   aria-label={`View posts tagged with ${tag}`}
                 >
                   {tag}
@@ -135,7 +135,7 @@ const PostPage = async ({ params }: PageProps) => {
         </header>
 
         {post.imageUrl && (
-          <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
+          <div className="mb-8 rounded overflow-hidden">
             <Image
               src={
                 !post.imageUrl.startsWith('http')
@@ -190,7 +190,7 @@ const PostPage = async ({ params }: PageProps) => {
               href={shareLinks.email}
               aria-label="Share via Email"
               title="Share via Email"
-              className="text-gray-500 hover:text-primary-600 p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
+              className="text-gray-500 hover:text-primary-700 p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
               target="_blank" rel="noopener noreferrer"
             >
               <EmailIcon />
@@ -201,7 +201,7 @@ const PostPage = async ({ params }: PageProps) => {
         <footer className="mt-12 pt-6 border-t border-gray-200">
           <Link
             href="/"
-            className="text-primary-600 hover:text-primary-800 hover:underline font-semibold transition-colors"
+            className="text-primary-700 hover:text-primary-800 hover:underline font-semibold transition-colors"
           >
             &larr; Back to all posts
           </Link>
