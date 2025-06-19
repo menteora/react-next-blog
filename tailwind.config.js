@@ -24,5 +24,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require('preline/plugin')],
+  // Preline v3 no longer ships with a Tailwind CSS plugin
+  // Remove the plugin entry to avoid module resolution errors
+  plugins: [],
 };
