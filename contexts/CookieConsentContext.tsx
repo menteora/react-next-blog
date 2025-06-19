@@ -27,6 +27,23 @@ const setCookie = (name: string, value: string, days = 180) => {
   document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
 };
 
+// Remove a cookie by setting its expiry in the past
+const deleteCookie = (name: string) => {
+  if (typeof document === 'undefined') return;
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+};
+
+// Clear common Google Analytics cookies
+const clearGaCookies = () => {
+  if (typeof document === 'undefined') return;
+  document.cookie.split(';').forEach(cookieString => {
+    const [cookieName] = cookieString.trim().split('=');
+    if (cookieName === '_gid' || cookieName === '_gat' || cookieName.startsWith('_ga')) {
+      deleteCookie(cookieName);
+    }
+  });
+};
+
 // Helper function to safely call gtag for consent updates
 const safeGtagConsentUpdate = (consentArgs: Record<string, 'granted' | 'denied'>) => {
   if (window.gtag) {
@@ -59,6 +76,7 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
       safeGtagConsentUpdate({ 'analytics_storage': 'denied' });
       setConsentGiven(false);
       setShowBanner(false);
+      clearGaCookies();
     } else {
       // Undecided: Default consent 'denied' for analytics_storage (set in index.html) applies.
       setConsentGiven(null);
@@ -91,6 +109,7 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     setCookie('cookieConsent', 'false');
     document.getElementById('ga-script')?.remove();
     document.getElementById('ga-init')?.remove();
+    clearGaCookies();
   };
 
   const openBanner = () => {
