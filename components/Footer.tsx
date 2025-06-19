@@ -9,11 +9,12 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-primary-800 text-primary-100 text-center p-6 shadow-inner">
       <p>&copy; {new Date().getFullYear()} React Markdown Blog. All rights reserved.</p>
+      <p className="text-sm mt-1">Powered by React, Tailwind CSS, and your Markdown!</p>
       <p className="text-sm mt-1">
-        Powered by React, Tailwind CSS, and your Markdown!{' '}
         <Link href="/page/privacy-policy" className="underline hover:text-primary-300">
           Informativa Privacy
-        </Link>{' | '}
+        </Link>
+        {' | '}
         <Link href="/page/cookie-policy" className="underline hover:text-primary-300 ml-1">
           Cookie Policy
         </Link>
