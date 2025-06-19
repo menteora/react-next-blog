@@ -8,13 +8,6 @@ import Footer from "../components/Footer";
 import { SiteConfigProvider } from "../contexts/SiteConfigContext";
 import { CookieConsentProvider } from "../contexts/CookieConsentContext";
 import { ThemeProvider } from "../contexts/ThemeContext";
-import { Inter } from "next/font/google";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 
 export const metadata: Metadata = {
@@ -28,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} antialiased bg-white text-gray-900 dark:bg-black dark:text-gray-100`}>
+    <html lang="en">
+      <body className="antialiased bg-white text-gray-900 dark:bg-black dark:text-gray-100">
         <ThemeProvider>
           <SiteConfigProvider>
             <CookieConsentProvider>
