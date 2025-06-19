@@ -19,27 +19,28 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       : post.imageUrl;
 
   return (
-    <article className="bg-white border rounded-lg overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+    <article className="relative bg-white border rounded-lg overflow-hidden hover:shadow-md transition-shadow flex flex-col cursor-pointer">
+      <Link
+        href={`/post/${post.slug}`}
+        className="absolute inset-0 z-10"
+        aria-label={`Read more about ${post.title}`}
+      >
+        <span className="sr-only">{`Read more about ${post.title}`}</span>
+      </Link>
       {post.imageUrl && (
-        <Link href={`/post/${post.slug}`} aria-hidden="true" tabIndex={-1}>
-          <div className="relative w-full h-48">
-            <Image
-              src={imageSrc as string}
-              alt={`Featured image for ${post.title}`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 100vw, 33vw"
-              priority={false}
-            />
-          </div>
-        </Link>
+        <div className="relative w-full h-48">
+          <Image
+            src={imageSrc as string}
+            alt={`Featured image for ${post.title}`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, 33vw"
+            priority={false}
+          />
+        </div>
       )}
-      <div className="p-6 flex flex-col flex-grow">
-        <h2 className="text-2xl font-bold text-primary-800 mb-2">
-          <Link href={`/post/${post.slug}`} className="hover:underline">
-            {post.title}
-          </Link>
-        </h2>
+      <div className="p-6 flex flex-col flex-grow relative z-20">
+        <h2 className="text-2xl font-bold text-primary-800 mb-2">{post.title}</h2>
         <div className="text-sm text-gray-500 mb-3">
           <span>By {post.author}</span> | <span>{new Date(post.date).toLocaleDateString()}</span>
         </div>
@@ -55,14 +56,6 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               {tag}
             </Link>
           ))}
-        </div>
-        <div className="mt-auto">
-          <Link
-            href={`/post/${post.slug}`}
-            className="inline-block bg-primary-700 text-white font-semibold px-4 py-2 rounded hover:bg-primary-800 transition-colors duration-300"
-          >
-            Read More &rarr;
-          </Link>
         </div>
       </div>
     </article>
