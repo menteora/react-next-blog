@@ -13,7 +13,7 @@ const CookieConsentBanner: React.FC = () => {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 bg-white text-gray-800 p-4 shadow-md border-t border-gray-200 z-[100]"
+      className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-4 shadow-md border-t border-gray-200 dark:border-gray-700 z-[100]"
       role="dialog"
       aria-live="polite"
       aria-label="Consenso cookie"
@@ -22,14 +22,14 @@ const CookieConsentBanner: React.FC = () => {
         <p className="text-sm mb-3 sm:mb-0 sm:mr-4">
           Usiamo cookie tecnici indispensabili al funzionamento del sito e, solo se acconsenti, cookie di analytics per statistiche anonime.
           Per maggiori dettagli consulta la nostra{' '}
-          <Link href="/page/cookie-policy" className="underline hover:text-primary-600">
+          <Link href="/page/cookie-policy" className="underline hover:text-primary-600 dark:hover:text-primary-400">
             Cookie Policy
           </Link>.
         </p>
         <div className="flex space-x-3">
           <button
             onClick={declineConsent}
-            className="px-4 py-2 text-sm font-medium rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            className="px-4 py-2 text-sm font-medium rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             aria-label="Rifiuta cookie"
           >
             Rifiuta

@@ -89,7 +89,7 @@ const HomePage: React.FC = () => {
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-700"></div>
-        <p className="ml-4 text-lg text-gray-700">Loading posts...</p>
+        <p className="ml-4 text-lg text-gray-700 dark:text-gray-300">Loading posts...</p>
       </div>
     );
   }
@@ -98,7 +98,7 @@ const HomePage: React.FC = () => {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <h1 className="text-3xl font-bold text-red-600 mb-4">Error Loading Posts</h1>
-        <p className="text-lg text-gray-700 whitespace-pre-line">{postsError}</p>
+        <p className="text-lg text-gray-700 dark:text-gray-300 whitespace-pre-line">{postsError}</p>
       </div>
     );
   }
@@ -118,8 +118,8 @@ const HomePage: React.FC = () => {
       )}
 
       <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold text-primary-800">Welcome to the Blog</h1>
-        <p className="text-lg text-primary-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
+        <h1 className="text-4xl font-bold text-primary-800 dark:text-primary-100">Welcome to the Blog</h1>
+        <p className="text-lg text-primary-600 dark:text-primary-300 mt-2">Discover insights and stories on web development, technology, and more.</p>
       </header>
       
       {currentPosts.length > 0 ? (
@@ -134,7 +134,7 @@ const HomePage: React.FC = () => {
               <button
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 bg-primary-700 text-white rounded hover:bg-primary-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                 aria-label="Previous page"
               >
                 &larr; Previous
@@ -146,7 +146,7 @@ const HomePage: React.FC = () => {
                   className={`px-4 py-2 rounded transition-colors ${
                     currentPage === number
                       ? 'bg-primary-800 text-white font-bold ring-2 ring-primary-500'
-                      : 'bg-primary-100 text-primary-800 hover:bg-primary-200'
+                      : 'bg-primary-100 dark:bg-primary-700 text-primary-800 dark:text-primary-100 hover:bg-primary-200 dark:hover:bg-primary-600'
                   }`}
                   aria-current={currentPage === number ? "page" : undefined}
                   aria-label={`Go to page ${number}`}
@@ -157,7 +157,7 @@ const HomePage: React.FC = () => {
               <button
                 onClick={() => paginate(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-primary-700 text-white rounded hover:bg-primary-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                 aria-label="Next page"
               >
                 Next &rarr;
@@ -167,8 +167,8 @@ const HomePage: React.FC = () => {
         </>
       ) : (
         <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold text-gray-700">No posts yet!</h2>
-          <p className="text-gray-500 mt-2">Check back soon for new content, or ensure the post manifest file is configured if posts exist.</p>
+          <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">No posts yet!</h2>
+          <p className="text-gray-500 dark:text-gray-400 mt-2">Check back soon for new content, or ensure the post manifest file is configured if posts exist.</p>
         </div>
       )}
     </div>

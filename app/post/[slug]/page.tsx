@@ -112,10 +112,10 @@ const PostPage = async ({ params }: PageProps) => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <article className="bg-white border rounded-lg p-6 md:p-10">
-        <header className="mb-8 border-b pb-6 border-gray-200">
+      <article className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 md:p-10">
+        <header className="mb-8 border-b pb-6 border-gray-200 dark:border-gray-700">
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary-800 mb-3">{post.title}</h1>
-          <div className="text-md text-gray-500">
+          <div className="text-md text-gray-500 dark:text-gray-400">
             <span>By {post.author}</span> | <span>Published on {new Date(post.date).toLocaleDateString()}</span>
           </div>
           {post.tags && post.tags.length > 0 && (
@@ -124,7 +124,7 @@ const PostPage = async ({ params }: PageProps) => {
                 <Link
                   key={tag}
                   href={`/tags/${slugify(tag)}`}
-                  className="inline-block bg-primary-100 text-primary-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 transition-colors duration-200"
+                  className="inline-block bg-primary-100 dark:bg-primary-700 text-primary-800 dark:text-primary-100 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full hover:bg-primary-200 dark:hover:bg-primary-600 transition-colors duration-200"
                   aria-label={`View posts tagged with ${tag}`}
                 >
                   {tag}
@@ -153,17 +153,17 @@ const PostPage = async ({ params }: PageProps) => {
         {post.markdownContent ? (
           <MarkdownRenderer content={post.markdownContent} />
         ) : (
-          <p className="text-gray-500">Content is not available for this post.</p>
+          <p className="text-gray-500 dark:text-gray-400">Content is not available for this post.</p>
         )}
 
-        <div className="mt-10 pt-8 border-t border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">Share this post</h3>
+        <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Share this post</h3>
           <div className="flex items-center space-x-3 sm:space-x-4">
             <a
               href={shareLinks.twitter}
               aria-label="Share on Twitter"
               title="Share on Twitter"
-              className="text-gray-500 hover:text-[#1DA1F2] p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1DA1F2] transition-colors duration-200"
+              className="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-300 p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
               target="_blank" rel="noopener noreferrer"
             >
               <TwitterIcon />
@@ -172,7 +172,7 @@ const PostPage = async ({ params }: PageProps) => {
               href={shareLinks.facebook}
               aria-label="Share on Facebook"
               title="Share on Facebook"
-              className="text-gray-500 hover:text-[#1877F2] p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1877F2] transition-colors duration-200"
+              className="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-300 p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
               target="_blank" rel="noopener noreferrer"
             >
               <FacebookIcon />
@@ -181,7 +181,7 @@ const PostPage = async ({ params }: PageProps) => {
               href={shareLinks.linkedin}
               aria-label="Share on LinkedIn"
               title="Share on LinkedIn"
-              className="text-gray-500 hover:text-[#0A66C2] p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0A66C2] transition-colors duration-200"
+              className="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-300 p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
               target="_blank" rel="noopener noreferrer"
             >
               <LinkedInIcon />
@@ -190,7 +190,7 @@ const PostPage = async ({ params }: PageProps) => {
               href={shareLinks.email}
               aria-label="Share via Email"
               title="Share via Email"
-              className="text-gray-500 hover:text-primary-700 p-2.5 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
+              className="text-gray-500 dark:text-gray-400 hover:text-primary-700 dark:hover:text-primary-300 p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
               target="_blank" rel="noopener noreferrer"
             >
               <EmailIcon />

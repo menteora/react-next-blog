@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSiteConfig } from '../contexts/SiteConfigContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { config, isLoading: isConfigLoading, error: configError } = useSiteConfig();
+  const { theme, toggleTheme } = useTheme();
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -21,13 +23,13 @@ const Navbar: React.FC = () => {
 
   const getNavLinkClass = (path: string) =>
     pathname === path
-      ? "text-primary-800 border-b-2 border-primary-800 pb-1"
-      : "hover:text-primary-600 transition-colors pb-1 border-b-2 border-transparent hover:border-primary-400";
+      ? "text-primary-800 dark:text-primary-100 border-b-2 border-primary-800 dark:border-primary-100 pb-1"
+      : "hover:text-primary-600 dark:hover:text-primary-300 transition-colors pb-1 border-b-2 border-transparent hover:border-primary-400 dark:hover:border-primary-300";
 
   const getMobileNavLinkClass = (path: string) =>
     pathname === path
-      ? "block py-2 px-3 text-primary-800 bg-primary-100 rounded"
-      : "block py-2 px-3 hover:bg-primary-100 hover:text-primary-800 rounded transition-colors";
+      ? "block py-2 px-3 text-primary-800 dark:text-primary-100 bg-primary-100 dark:bg-primary-700 rounded"
+      : "block py-2 px-3 hover:bg-primary-100 dark:hover:bg-primary-700 hover:text-primary-800 dark:hover:text-primary-100 rounded transition-colors";
 
   const navLinks = [
     { to: "/", text: "Home" },
@@ -38,9 +40,9 @@ const Navbar: React.FC = () => {
   const displayTitle = isConfigLoading ? "Loading..." : (configError ? "Blog" : config.blogTitle);
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-primary-800 hover:text-primary-600 transition-colors" aria-label="Go to homepage">
+        <Link href="/" className="text-2xl font-bold text-primary-800 dark:text-primary-100 hover:text-primary-600 dark:hover:text-primary-300 transition-colors" aria-label="Go to homepage">
           {displayTitle}
         </Link>
 
@@ -51,6 +53,22 @@ const Navbar: React.FC = () => {
               {link.text}
             </Link>
           ))}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+            className="p-2 rounded-md text-primary-800 dark:text-primary-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+          >
+            {theme === 'dark' ? (
+              <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 18a6 6 0 100-12 6 6 0 000 12z" />
+                <path d="M12 2v2m0 16v2m8-10h2M2 12h2m13.657-6.657l1.414-1.414M4.929 19.071l1.414-1.414m0-12.728L4.93 4.93m14.142 14.142l-1.414-1.414" />
+              </svg>
+            ) : (
+              <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8 8 0 1010.586 10.586z" />
+              </svg>
+            )}
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -60,7 +78,7 @@ const Navbar: React.FC = () => {
             aria-label="Toggle navigation menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
-            className="p-2 rounded-md text-primary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+            className="p-2 rounded-md text-primary-800 dark:text-primary-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
           >
             {isMobileMenuOpen ? (
               // X icon
@@ -79,7 +97,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-white border-t border-gray-200">
+        <div id="mobile-menu" className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map(link => (
               <Link
@@ -91,6 +109,16 @@ const Navbar: React.FC = () => {
                 {link.text}
               </Link>
             ))}
+            <button
+              onClick={() => {
+                toggleTheme();
+                setIsMobileMenuOpen(false);
+              }}
+              aria-label="Toggle dark mode"
+              className="block py-2 px-3 rounded text-left w-full text-primary-800 dark:text-primary-200 hover:bg-primary-100 dark:hover:bg-primary-700 transition-colors"
+            >
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </button>
           </div>
         </div>
       )}

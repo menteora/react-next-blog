@@ -39,21 +39,21 @@ const GenericPage = async ({ params }: PageProps) => {
 
     return (
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <article className="bg-white border rounded-lg p-6 md:p-10">
-          <header className="mb-8 border-b pb-6 border-gray-200">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-primary-800">{pageData.title}</h1>
+        <article className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 md:p-10">
+          <header className="mb-8 border-b pb-6 border-gray-200 dark:border-gray-700">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-primary-800 dark:text-primary-100">{pageData.title}</h1>
           </header>
 
           {pageData.markdownContent ? (
             <MarkdownRenderer content={pageData.markdownContent} />
           ) : (
-            <p className="text-gray-500">Content is not available for this page.</p>
+            <p className="text-gray-500 dark:text-gray-400">Content is not available for this page.</p>
           )}
 
-          <footer className="mt-12 pt-6 border-t border-gray-200">
+          <footer className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
             <Link
               href="/"
-              className="text-primary-700 hover:text-primary-800 hover:underline font-semibold transition-colors"
+              className="text-primary-700 dark:text-primary-300 hover:text-primary-800 dark:hover:text-primary-100 hover:underline font-semibold transition-colors"
             >
               &larr; Back to Home
             </Link>
@@ -67,7 +67,7 @@ const GenericPage = async ({ params }: PageProps) => {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <h1 className="text-4xl font-bold text-red-600 mb-4">Error</h1>
-        <p className="text-lg text-gray-700 mb-6">{`Could not load page content. ${message}`}</p>
+        <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">{`Could not load page content. ${message}`}</p>
         <Link
           href="/"
           className="bg-primary-700 text-white font-semibold px-6 py-3 rounded hover:bg-primary-800 transition-colors duration-300"

@@ -7,6 +7,7 @@ import GoogleAnalyticsLoader from "../components/GoogleAnalyticsLoader";
 import Footer from "../components/Footer";
 import { SiteConfigProvider } from "../contexts/SiteConfigContext";
 import { CookieConsentProvider } from "../contexts/CookieConsentContext";
+import { ThemeProvider } from "../contexts/ThemeContext";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -28,21 +29,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} antialiased bg-white text-gray-900`}>
-        <SiteConfigProvider>
-          <CookieConsentProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow bg-gray-50 py-8">
-                <AnalyticsRouteChangeTracker />
-                <GoogleAnalyticsLoader />
-                {children}
-              </main>
-              <CookieConsentBanner />
-              <Footer />
-            </div>
-          </CookieConsentProvider>
-        </SiteConfigProvider>
+      <body className={`${inter.className} antialiased bg-white text-gray-900 dark:bg-black dark:text-gray-100`}>
+        <ThemeProvider>
+          <SiteConfigProvider>
+            <CookieConsentProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-grow bg-gray-50 dark:bg-gray-900 py-8">
+                  <AnalyticsRouteChangeTracker />
+                  <GoogleAnalyticsLoader />
+                  {children}
+                </main>
+                <CookieConsentBanner />
+                <Footer />
+              </div>
+            </CookieConsentProvider>
+          </SiteConfigProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

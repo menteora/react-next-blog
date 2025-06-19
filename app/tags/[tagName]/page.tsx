@@ -83,12 +83,12 @@ const PostsByTagPage = async ({ params }: PageProps) => {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-10">
-        <h1 className="text-4xl font-bold text-primary-800 mb-2">
-          Posts tagged with: <span className="text-primary-700">{displayTag || 'Unknown Tag'}</span>
+        <h1 className="text-4xl font-bold text-primary-800 dark:text-primary-100 mb-2">
+          Posts tagged with: <span className="text-primary-700 dark:text-primary-300">{displayTag || 'Unknown Tag'}</span>
         </h1>
         <Link
           href="/tags"
-          className="text-primary-700 hover:text-primary-800 hover:underline font-semibold transition-colors"
+          className="text-primary-700 dark:text-primary-300 hover:text-primary-800 dark:hover:text-primary-100 hover:underline font-semibold transition-colors"
         >
           &larr; View all tags
         </Link>
@@ -102,11 +102,11 @@ const PostsByTagPage = async ({ params }: PageProps) => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold text-gray-700">No posts found for this tag.</h2>
-          <p className="text-gray-500 mt-2">Try browsing other tags or viewing all posts. Ensure the post manifest is configured if you expect posts here.</p>
+          <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">No posts found for this tag.</h2>
+          <p className="text-gray-500 dark:text-gray-400 mt-2">Try browsing other tags or viewing all posts. Ensure the post manifest is configured if you expect posts here.</p>
           <Link
             href="/"
-            className="mt-6 inline-block bg-primary-700 text-white font-semibold px-6 py-3 rounded hover:bg-primary-800 transition-colors"
+            className="mt-6 inline-block bg-primary-700 hover:bg-primary-800 text-white font-semibold px-6 py-3 rounded transition-colors"
           >
             View All Posts
           </Link>

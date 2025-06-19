@@ -56,9 +56,9 @@ const TagsPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+        <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-700"></div>
-        <p className="ml-4 text-lg text-gray-700">Loading tags...</p>
+        <p className="ml-4 text-lg text-gray-700 dark:text-gray-300">Loading tags...</p>
       </div>
     );
   }
@@ -67,7 +67,7 @@ const TagsPage: React.FC = () => {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <h1 className="text-3xl font-bold text-red-600 mb-4">Error Loading Tags</h1>
-        <p className="text-lg text-gray-700 whitespace-pre-line">{error}</p>
+        <p className="text-lg text-gray-700 dark:text-gray-300 whitespace-pre-line">{error}</p>
       </div>
     );
   }
@@ -75,8 +75,8 @@ const TagsPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-10 text-center">
-        <h1 className="text-5xl font-extrabold text-primary-800">All Tags</h1>
-        <p className="text-xl text-gray-600 mt-2">Browse posts by topic.</p>
+        <h1 className="text-5xl font-extrabold text-primary-800 dark:text-primary-100">All Tags</h1>
+        <p className="text-xl text-gray-600 dark:text-gray-300 mt-2">Browse posts by topic.</p>
       </header>
 
       {tags.length > 0 ? (
@@ -85,7 +85,7 @@ const TagsPage: React.FC = () => {
             <Link
               key={tag}
               href={`/tags/${slugify(tag)}`}
-              className="bg-primary-100 text-primary-800 text-lg font-semibold px-6 py-3 rounded hover:bg-primary-200 transition-colors"
+              className="bg-primary-100 dark:bg-primary-700 text-primary-800 dark:text-primary-100 text-lg font-semibold px-6 py-3 rounded hover:bg-primary-200 dark:hover:bg-primary-600 transition-colors"
               aria-label={`View posts tagged with ${tag}`}
             >
               {tag}
@@ -94,8 +94,8 @@ const TagsPage: React.FC = () => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold text-primary-800">No tags found.</h2>
-          <p className="text-gray-500 mt-2">It looks like there are no tags associated with any posts yet, or the post manifest file is not configured.</p>
+          <h2 className="text-2xl font-semibold text-primary-800 dark:text-primary-100">No tags found.</h2>
+          <p className="text-gray-500 dark:text-gray-400 mt-2">It looks like there are no tags associated with any posts yet, or the post manifest file is not configured.</p>
         </div>
       )}
     </div>
