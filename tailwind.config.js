@@ -2,6 +2,7 @@ module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './node_modules/preline/dist/*.js',
   ],
   darkMode: 'class',
   theme: {
@@ -23,5 +24,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('preline/plugin')],
 };
