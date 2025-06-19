@@ -85,7 +85,7 @@ const TagsPage: React.FC = () => {
             <Link
               key={tag}
               href={`/tags/${slugify(tag)}`}
-              className="bg-primary-700 text-white text-lg font-semibold px-6 py-3 rounded hover:bg-primary-800 transition-colors"
+              className="bg-primary-100 text-primary-800 text-lg font-semibold px-6 py-3 rounded hover:bg-primary-200 transition-colors"
               aria-label={`View posts tagged with ${tag}`}
             >
               {tag}
@@ -94,7 +94,7 @@ const TagsPage: React.FC = () => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold text-gray-700">No tags found.</h2>
+          <h2 className="text-2xl font-semibold text-primary-800">No tags found.</h2>
           <p className="text-gray-500 mt-2">It looks like there are no tags associated with any posts yet, or the post manifest file is not configured.</p>
         </div>
       )}
