@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
-import { HSStaticMethods } from "preline";
+// Import compiled JS build to avoid TypeScript entry resolution issues
+import { HSStaticMethods } from "preline/dist/index.js";
 
 const PrelineInit: React.FC = () => {
   useEffect(() => {
