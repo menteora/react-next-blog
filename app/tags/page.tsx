@@ -57,7 +57,7 @@ const TagsPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-700"></div>
         <p className="ml-4 text-lg text-gray-700">Loading tags...</p>
       </div>
     );
@@ -85,7 +85,7 @@ const TagsPage: React.FC = () => {
             <Link
               key={tag}
               href={`/tags/${slugify(tag)}`}
-              className="bg-primary-600 text-white text-lg font-semibold px-6 py-3 rounded-lg shadow hover:bg-primary-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              className="bg-primary-700 text-white text-lg font-semibold px-6 py-3 rounded hover:bg-primary-800 transition-colors"
               aria-label={`View posts tagged with ${tag}`}
             >
               {tag}

@@ -39,7 +39,7 @@ const GenericPage = async ({ params }: PageProps) => {
 
     return (
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <article className="bg-white rounded-lg shadow-xl p-6 md:p-10">
+        <article className="bg-white border rounded-lg p-6 md:p-10">
           <header className="mb-8 border-b pb-6 border-gray-200">
             <h1 className="text-4xl md:text-5xl font-extrabold text-primary-800">{pageData.title}</h1>
           </header>
@@ -53,7 +53,7 @@ const GenericPage = async ({ params }: PageProps) => {
           <footer className="mt-12 pt-6 border-t border-gray-200">
             <Link
               href="/"
-              className="text-primary-600 hover:text-primary-800 hover:underline font-semibold transition-colors"
+              className="text-primary-700 hover:text-primary-800 hover:underline font-semibold transition-colors"
             >
               &larr; Back to Home
             </Link>
@@ -70,7 +70,7 @@ const GenericPage = async ({ params }: PageProps) => {
         <p className="text-lg text-gray-700 mb-6">{`Could not load page content. ${message}`}</p>
         <Link
           href="/"
-          className="bg-primary-600 text-white font-semibold px-6 py-3 rounded hover:bg-primary-700 transition-colors duration-300"
+          className="bg-primary-700 text-white font-semibold px-6 py-3 rounded hover:bg-primary-800 transition-colors duration-300"
         >
           Back to Home
         </Link>

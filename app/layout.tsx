@@ -21,12 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased bg-white text-gray-900">
         <SiteConfigProvider>
           <CookieConsentProvider>
             <div className="flex flex-col min-h-screen">
               <Navbar />
-              <main className="flex-grow bg-gray-100 py-8">
+              <main className="flex-grow bg-gray-50 py-8">
                 <AnalyticsRouteChangeTracker />
                 <GoogleAnalyticsLoader />
                 {children}

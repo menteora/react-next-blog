@@ -88,7 +88,7 @@ const HomePage: React.FC = () => {
   if (isLoadingPosts) {
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-700"></div>
         <p className="ml-4 text-lg text-gray-700">Loading posts...</p>
       </div>
     );
@@ -106,7 +106,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       {heroImageUrl && (
-        <section className="mb-12 rounded-lg overflow-hidden shadow-xl">
+        <section className="mb-8 rounded overflow-hidden">
           <Image
             src={heroImageUrl}
             alt="Blog hero banner"
@@ -117,9 +117,9 @@ const HomePage: React.FC = () => {
         </section>
       )}
 
-      <header className="mb-12 text-center">
-        <h1 className="text-5xl font-extrabold text-primary-800">Welcome to the Blog</h1>
-        <p className="text-xl text-gray-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
+      <header className="mb-8 text-center">
+        <h1 className="text-4xl font-bold text-gray-900">Welcome to the Blog</h1>
+        <p className="text-lg text-gray-600 mt-2">Discover insights and stories on web development, technology, and more.</p>
       </header>
       
       {currentPosts.length > 0 ? (
@@ -134,7 +134,7 @@ const HomePage: React.FC = () => {
               <button
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 bg-primary-700 text-white rounded hover:bg-primary-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                 aria-label="Previous page"
               >
                 &larr; Previous
@@ -146,7 +146,7 @@ const HomePage: React.FC = () => {
                   className={`px-4 py-2 rounded transition-colors ${
                     currentPage === number
                       ? 'bg-primary-800 text-white font-bold ring-2 ring-primary-500'
-                      : 'bg-primary-200 text-primary-700 hover:bg-primary-300'
+                      : 'bg-primary-100 text-primary-800 hover:bg-primary-200'
                   }`}
                   aria-current={currentPage === number ? "page" : undefined}
                   aria-label={`Go to page ${number}`}
@@ -157,7 +157,7 @@ const HomePage: React.FC = () => {
               <button
                 onClick={() => paginate(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 bg-primary-700 text-white rounded hover:bg-primary-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                 aria-label="Next page"
               >
                 Next &rarr;

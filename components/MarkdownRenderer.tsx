@@ -13,7 +13,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
     h2: ({ ...props }) => <h2 className="text-3xl font-semibold my-5 border-b pb-2 border-gray-200" {...props} />,
     h3: ({ ...props }) => <h3 className="text-2xl font-semibold my-4" {...props} />,
     p: ({ ...props }) => <p className="my-4 leading-relaxed" {...props} />,
-    a: ({ ...props }) => <a className="text-primary-600 hover:text-primary-800 underline" {...props} />,
+    a: ({ ...props }) => <a className="text-primary-700 hover:text-primary-800 underline" {...props} />, 
     ul: ({ ...props }) => <ul className="list-disc pl-8 my-4 space-y-1" {...props} />,
     ol: ({ ...props }) => <ol className="list-decimal pl-8 my-4 space-y-1" {...props} />,
     li: ({ ...props }) => <li className="my-1" {...props} />,
