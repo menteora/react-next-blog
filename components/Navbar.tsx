@@ -117,7 +117,16 @@ const Navbar: React.FC = () => {
               aria-label="Toggle dark mode"
               className="block py-2 px-3 rounded text-left w-full text-primary-800 dark:text-primary-200 hover:bg-primary-100 dark:hover:bg-primary-700 transition-colors"
             >
-              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+              {theme === 'dark' ? (
+                <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 18a6 6 0 100-12 6 6 0 000 12z" />
+                  <path d="M12 2v2m0 16v2m8-10h2M2 12h2m13.657-6.657l1.414-1.414M4.929 19.071l1.414-1.414m0-12.728L4.93 4.93m14.142 14.142l-1.414-1.414" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8 8 0 1010.586 10.586z" />
+                </svg>
+              )}
             </button>
           </div>
         </div>

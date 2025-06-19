@@ -14,20 +14,25 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const stored = (typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null) as Theme | null;
-    const systemPref = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    const initial = stored || systemPref;
-    setTheme(initial);
-    document.documentElement.classList.toggle("dark", initial === "dark");
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const systemPref: Theme = mediaQuery.matches ? "dark" : "light";
+    setTheme(systemPref);
+    document.documentElement.classList.toggle("dark", systemPref === "dark");
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      const newTheme: Theme = e.matches ? "dark" : "light";
+      setTheme(newTheme);
+      document.documentElement.classList.toggle("dark", newTheme === "dark");
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
     document.documentElement.classList.toggle("dark", next === "dark");
-    if (typeof localStorage !== "undefined") {
-      localStorage.setItem("theme", next);
-    }
   };
 
   return (
